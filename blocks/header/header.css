@@ -1,0 +1,32 @@
+.header {
+  width: calc(100% - 400px);
+  min-height: 72px;
+  margin: 0 auto;
+  margin-top: 45px;
+  grid-area: header;
+
+
+}
+
+.header::after {
+  margin-top: 41px;
+  content: '';
+  display: block;
+  height: 1px;
+  background: #545454;
+  opacity: .7;
+
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    width: 100%;
+    min-height: 56px;
+    margin: 0;
+    margin-top: 28px;
+  }
+
+  .header::after {
+    margin-top: 31.6px;
+  }
+}
