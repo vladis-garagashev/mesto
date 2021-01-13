@@ -4,13 +4,13 @@
   margin-top: 50px;
   display: grid;
   gap: 20px 17px;
-  grid-template-columns: repeat(auto-fit, 282px);
+  grid-template-columns: repeat(auto-fit, minmax(282px, auto));
   justify-content: center;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 980px) {
   .cards {
-    width: calc(100% - 188px);
-    gap: 20px 15px;
+    width: calc(100% - 180px);
+    margin-top: 36px;
   }
 }
