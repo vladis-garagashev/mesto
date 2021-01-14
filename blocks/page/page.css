@@ -3,6 +3,7 @@
   margin: 0 auto;
   color: #fff;
   background-color: #000;
+  font-family: "Inter", Arial, sans-serif;
   display: grid;
   grid-template-areas:
     "header"
