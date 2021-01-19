@@ -1,9 +1,9 @@
 .profile {
-  width: calc(100% - 400px);
+  max-width: 880px;
   margin: 0 auto;
   margin-top: 40px;
   display: grid;
-  grid-template-columns: 120px minmax(auto, 336px) auto;
+  grid-template-columns: 120px minmax(336px, auto) auto;
   column-gap: 30px;
 }
 
@@ -19,7 +19,7 @@
 
 @media screen and (max-width: 767px) {
   .profile {
-    width: calc(100% - 38px);
+    min-width: 282px;
 
   }
 }

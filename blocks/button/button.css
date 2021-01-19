@@ -6,7 +6,7 @@
   cursor: pointer;
   box-sizing: border-box;
   opacity: 1;
-  transform: opacity .2s linear;
+  transition: opacity .2s linear;
 
   display: flex;
   justify-content: center;
