@@ -1,7 +1,9 @@
 .form__heading {
-  width: calc(100% - 72px);
+  width: calc(100% - 100px);
   margin: 0;
   margin-top: 35px;
+  margin-left: 36px;
+  align-self: start;
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
@@ -10,8 +12,11 @@
 
 @media screen and (max-width: 767px) {
   .form__heading {
+    width: calc(100% - 44px);
     font-size: 18px;
     line-height: 22px;
+    margin-left: 0;
+    align-self: center;
 
   }
 }
