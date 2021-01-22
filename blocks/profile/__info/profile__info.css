@@ -1,12 +1,19 @@
 .profile__info {
   display: grid;
-  grid-template-columns: minmax(290px, auto) 1fr;
+  column-gap: 18px;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'name button'
+    'about about';
 }
 
 @media screen and (max-width: 1023px) {
   .profile__info {
-    justify-items: center;
-    grid-template-columns: minmax(190px, auto) ;
+    column-gap: 10px;
+    grid-template-columns: auto;
+    grid-template-areas:
+      '. name button .'
+      'about about about about';
 
   }
 }

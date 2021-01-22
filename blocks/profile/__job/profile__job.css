@@ -1,12 +1,11 @@
-.profile__about {
+.profile__job {
   width: 100%;
   margin: 0;
+  grid-area: about;
   margin-top: 16px;
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
-  grid-column: 1/3;
-  grid-row: 2/3;
 
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -14,11 +13,10 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .profile__about {
+  .profile__job {
     font-size: 14px;
     line-height: 17px;
     margin-top: 14px;
-    grid-row: 3/4;
     text-align: center;
 
   }
