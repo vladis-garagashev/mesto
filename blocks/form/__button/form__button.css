@@ -1,0 +1,8 @@
+.form__button {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transition: opacity .2s linear;
+}
+
+

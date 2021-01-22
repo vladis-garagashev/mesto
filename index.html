@@ -9,7 +9,9 @@
 </head>
 
 <body class="root">
+
   <div class="page">
+
     <header class="header">
       <img src="./images/header__logo.svg" alt="Логотип" class="header__logo">
     </header>
@@ -20,14 +22,10 @@
         <img src="./images/profile__avatar.jpg" alt="" class="profile__avatar">
         <div class="profile__info">
           <p class="profile__name">Жак-Ив Кусто</p>
-          <button class="button button_type_edit">
-            <img class="button__edit-image" src="./images/edit-button.svg" alt="">
-          </button>
-          <p class="profile__proff">Исследователь океана</p>
+          <button class="button button_type_edit" aria-label="Редактировать профиль"></button>
+          <p class="profile__about">Исследователь океана</p>
         </div>
-        <button class="button button_type_add">
-          <img class="button__add-image" src="./images/add-button.svg" alt="">
-        </button>
+        <button class="button button_type_add" aria-label="Добавить фото"></button>
       </section>
 
       <section class="cards">
@@ -35,9 +33,7 @@
           <img src="./images/card__image-1.jpg" alt="Карачаевск" class="card__image">
           <div class="card__content">
             <p class="card__heading">Карачаевск</p>
-            <button class="button button__like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -45,9 +41,7 @@
           <img src="./images/card__image-2.jpg" alt="Гора Эльбрус" class="card__image">
           <div class="card__content">
             <p class="card__heading">Гора Эльбрус</p>
-            <button class="button button__like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -55,9 +49,7 @@
           <img src="./images/card__image-3.jpg" alt="Домбай" class="card__image">
           <div class="card__content">
             <p class="card__heading">Домбай</p>
-            <button class="button button__like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -65,9 +57,7 @@
           <img src="./images/card__image-2.jpg" alt="Гора Эльбрус" class="card__image">
           <div class="card__content">
             <p class="card__heading">Гора Эльбрус</p>
-            <button class="button button__like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -75,9 +65,7 @@
           <img src="./images/card__image-3.jpg" alt="Домбай" class="card__image">
           <div class="card__content">
             <p class="card__heading">Домбай</p>
-            <button class="button button__like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -85,9 +73,7 @@
           <img src="./images/card__image-1.jpg" alt="Карачаево-Черкесия" class="card__image">
           <div class="card__content">
             <p class="card__heading">Карачаево-Черкесия</p>
-            <button class="button button__type_like">
-              <img src="./images/like-icon.svg" alt="Лайк" class="card__like-icon">
-            </button>
+            <button class="button button__type_like"></button>
           </div>
         </div>
 
@@ -98,6 +84,21 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
+
+  <section class="popup">
+
+    <div class="popup__container">
+      <form action="#" class="form">
+        <h1 class="form__heading"> Редактировать профиль</h1>
+        <input class="form__item form__item_el_name" type="text" name="name" id="name" placeholder="Ваше имя" required>
+        <input class="form__item form__item_el_about" type="text" name="about" id="about" placeholder="Немного о себе"
+          required>
+        <input class="form__button form__button_type_submit" type="submit" value="Сохранить">
+        <button class="form__button form__button_type_close" type="reset" aria-label="Закрыть форму"></button>
+      </form>
+    </div>
+
+  </section>
 
 </body>
 
