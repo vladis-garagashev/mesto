@@ -1,0 +1,25 @@
+@font-face {
+  src: url('./Inter-Regular.woff'), url('./Inter-Regular.woff2');
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url('./Inter-Black.woff'), url('./Inter-Black.woff2');
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+}
+
+@font-face {
+  src: url('./Inter-Medium.woff'), url('./Inter-Medium.woff2');
+  font-family: 'Inter Medium';
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Переместил все шрифты, как вы и сказали (надеюсь правильно),
+ но появился вопрос. В прошлой проектной работе шрифты располагались
+ в корневой папке с пректом и ревьюер засчитал мой проект. Все таки
+ как правильно, или это не так важно? Ответьте здесь, пожалуйста) */
