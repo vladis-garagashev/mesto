@@ -25,7 +25,7 @@
         <img src="./images/profile__avatar.jpg" alt="Аватар профиля" class="profile__avatar">
 
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>  <!-- не придумал ничего лучше, как поставить заголовок h1 сюда -->
+          <h1 class="profile__name">Жак-Ив Кусто</h1> <!-- не придумал ничего лучше, как поставить заголовок h1 сюда -->
           <button type="button" class="button button_type_edit" aria-label="Редактировать профиль"></button>
           <p class="profile__job">Исследователь океана</p>
         </div>
@@ -94,18 +94,19 @@
 
   </div>
 
-  <section class="popup">
+  <div class="popup">
+    <div class="popup__container">
 
-    <form class="form">
-      <h3 class="form__heading"> Редактировать профиль</h3>
-      <input class="form__item form__item_el_name" type="text" name="name" id="name" placeholder="Ваше имя" required>
-      <input class="form__item form__item_el_job" type="text" name="about" id="about" placeholder="Немного о себе"
-        required>
-      <input class="form__button form__button_type_submit" type="submit" value="Сохранить">
-      <button class="form__button form__button_type_close" type="button" aria-label="Закрыть форму"></button>
-    </form>
+      <form class="form" method="post" name="editProfileForm">
+        <h3 class="form__heading"> Редактировать профиль</h3>
+        <input class="form__item form__item__element_name" type="text" name="name" placeholder="Имя" required>
+        <input class="form__item form__item__element_job" type="text" name="about" placeholder="О себе" required>
+        <button class="form__button form__button_type_submit" type="submit">Сохранить</button>
+        <button class="form__button form__button_type_close" type="reset" aria-label="Закрыть форму"></button>
+      </form>
 
-  </section>
+    </div>
+  </div>
 
   <script src="./scripts/main.js"></script>
 

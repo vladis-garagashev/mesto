@@ -1,7 +1,7 @@
 .form__item {
   width: calc(100% - 72px);
+  height: 27px;
   padding: 0;
-  padding-bottom: 13px;
   font-size: 14px;
   line-height: 17px;
   font-weight: 400;

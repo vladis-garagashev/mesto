@@ -23,8 +23,9 @@
 
 @media screen and (max-width: 767px) {
   .form__button_type_close {
-    width: 26px;
-    height: 26px;
-    right: 0;
+    width: 20px;
+    height: 20px;
+    top: -43px;
+    right: 8px;
   }
 }
