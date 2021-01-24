@@ -6,18 +6,19 @@ let popupCloseButton = popup.querySelector('.form__button_type_close');
 // Находим форму в DOM
 let formElement = document.querySelector('.form');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.form__item_el_name');
-let jobInput = formElement.querySelector('.form__item_el_job');
+let nameInput = formElement.querySelector('.form__item__element_name');
+let jobInput = formElement.querySelector('.form__item__element_job');
 // Выберите элементы, куда должны быть вставлены значения полей
 let profileName = document.querySelector('.profile__name')
 let profileJob = document.querySelector('.profile__job');
-// Вставляем старые значения в инпуты
-nameInput.value = profileName.textContent;
-jobInput.value = profileJob.textContent;
 
 // Обработчик открытия и закрытия попапа
 function togglePopup() {
-  if (popup.classList.contains('popup_opend') === false) {
+  // Вставляем старые значения в инпуты
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+
+  if (!popup.classList.contains('popup_opend')) {
     popup.classList.add('popup_opend');
 
   } else {
@@ -26,13 +27,6 @@ function togglePopup() {
   }
 }
 
-// Обработчик закрытия попапа при
-// клике на оверлей
-function closePopup(evt) {
-  if (evt.target === evt.currentTarget) {
-    togglePopup();
-  }
-}
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler(evt) {
@@ -52,7 +46,6 @@ function formSubmitHandler(evt) {
 // Слушатели открытия и закрытия попапа
 popupOpenButton.addEventListener('click', togglePopup);
 popupCloseButton.addEventListener('click', togglePopup);
-popup.addEventListener('click', closePopup);
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
