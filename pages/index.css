@@ -38,8 +38,8 @@
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__item/form__item.css);
-@import url(../blocks/form/__item/_element/form__item___element_name.css);
-@import url(../blocks/form/__item/_element/form__item__element_job.css);
+@import url(../blocks/form/__item/_element/form__item_element_name.css);
+@import url(../blocks/form/__item/_element/form__item_element_job.css);
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/form/__button/_type/form__button_type_submit.css);
 @import url(../blocks/form/__button/_type/form__button_type_close.css);
