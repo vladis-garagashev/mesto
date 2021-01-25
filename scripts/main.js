@@ -6,8 +6,8 @@ let popupCloseButton = popup.querySelector('.form__button_type_close');
 // Находим форму в DOM
 let formElement = document.querySelector('.form');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.form__item__element_name');
-let jobInput = formElement.querySelector('.form__item__element_job');
+let nameInput = formElement.querySelector('.form__item_element_name');
+let jobInput = formElement.querySelector('.form__item_element_job');
 // Выберите элементы, куда должны быть вставлены значения полей
 let profileName = document.querySelector('.profile__name')
 let profileJob = document.querySelector('.profile__job');
