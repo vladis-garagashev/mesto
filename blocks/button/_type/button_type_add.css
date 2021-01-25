@@ -4,10 +4,10 @@
   border: 2px solid #fff;
   justify-self: end;
   align-self: center;
-  background-image: url('../../../images/add-button.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 22px;
+  background: url('../../../images/add-button.svg'); /* <- Вы имелли ввиду конкретно здесь можно использовать */
+  background-position: center;                       /* сокращение или то, что можно записать все в одну строку? */
+  background-repeat: no-repeat;                      /* Если 2е, то к след. работе запишу все в одну строку, */
+  background-size: 22px;                             /* хотя так мне удобнее) */
 }
 
 @media screen and (max-width: 1023px) {
