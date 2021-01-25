@@ -14,11 +14,12 @@ let profileJob = document.querySelector('.profile__job');
 
 // Обработчик открытия и закрытия попапа
 function togglePopup() {
-  // Вставляем старые значения в инпуты
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
 
   if (!popup.classList.contains('popup_opend')) {
+    // Вставляем старые значения в инпуты
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
+    
     popup.classList.add('popup_opend');
 
   } else {
