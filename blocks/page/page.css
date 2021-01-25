@@ -2,11 +2,9 @@
   max-width: 1280px;
   min-width: 320px;
   margin: 0 auto;
-  display: grid;
-  grid-template-areas:
-    "header"
-    "content"
-    "footer";
+  color: #fff;
+  background-color: #000;
+  font-family: "Inter", Arial, sans-serif;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

@@ -1,16 +1,14 @@
 .header {
+  flex-shrink: 0;
   width: 100%;
-  max-width: 880px;
   min-height: 72px;
-  margin: 0 auto;
-  margin-top: 45px;
-  grid-area: header;
+  padding-top: 45px;
 
 }
 
 .header::after {
-  margin-top: 41px;
   content: '';
+  margin-top: 41px;
   display: block;
   height: 1px;
   background: #545454;
@@ -18,12 +16,10 @@
 
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 879px) {
   .header {
-    max-width: none;
     min-height: 56px;
-    margin: 0;
-    margin-top: 28px;
+    padding-top: 28px;
   }
 
   .header::after {

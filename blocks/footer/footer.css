@@ -1,17 +1,15 @@
 .footer {
+  flex-shrink: 0;
   width: 100%;
-  max-width: 880px;
-  margin: 0 auto;
   margin-top: 66px;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
   box-sizing: border-box;
 
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 879px) {
   .footer {
-    max-width: none;
     margin-top: 48px;
-    margin-bottom: 36px;
+    padding-bottom: 36px;
   }
 }
