@@ -87,6 +87,10 @@ initialCards.forEach(function (element) {
   card.querySelector('.card__image').setAttribute('style', `background-image: url(${element.link})`);
   card.querySelector('.card__heading').textContent = element.name;
 
+  card.querySelector('.button_type_like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('button_type_like_active');
+  })
+
   cardsList.append(card);
 })
 
