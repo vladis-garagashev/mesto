@@ -36,60 +36,6 @@
       <section class="cards">
         <ul class="cards__list">
 
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-1.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Карачаевск</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-2.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Гора Эльбрус</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-3.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Домбай</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-2.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Гора Эльбрус</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-3.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Домбай</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
-          <li class="card">
-            <div class="card__image" style="background-image: url('./images/card__image-1.jpg');"></div>
-            <div class="card__content">
-              <h2 class="card__heading">Карачаево-Черкесия</h2>
-              <button type="button" class="button button_type_like" aria-label="Лайк"></button>
-            </div>
-            <button class="button button_type_delete" aria-label="Удалить карточку"></button>
-          </li>
-
         </ul>
       </section>
 
@@ -114,6 +60,18 @@
 
     </div>
   </div>
+
+  <template class='template-card'>
+    <li class="card">
+      <div class="card__image"></div>
+      <div class="card__content">
+        <h2 class="card__heading"></h2>
+        <button type="button" class="button button_type_like" aria-label="Лайк"></button>
+      </div>
+      <button  type="button" class="button button_type_delete" aria-label="Удалить карточку"></button>
+    </li>
+
+  </template>
 
   <script src="./scripts/main.js"></script>
 
