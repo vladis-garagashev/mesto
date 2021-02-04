@@ -51,9 +51,12 @@ popupCloseButton.addEventListener('click', togglePopup);
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
+// Добавляем дефолтные карточки
+// Находим контейнер с карточками в DOM
 const cardsList = document.querySelector('.cards__list');
+// Находим шаблон карточки в DOM
 const cardTemplate = document.querySelector('.template-card').content;
-
+// Создаем список дефолтных карточек
 const initialCards = [
   {
     name: 'Архыз',
@@ -80,7 +83,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+// Загружаем карточки на страницу
 initialCards.forEach(function (element) {
   const card = cardTemplate.cloneNode(true);
 
@@ -91,11 +94,12 @@ initialCards.forEach(function (element) {
     evt.target.classList.toggle('button_type_like_active');
   })
 
+  card.querySelector('.button_type_delete').addEventListener('click', function (evt) {
+    evt.target.closest('.card').remove();
+  });
+
   cardsList.append(card);
 })
-
-const deleteCardButton = document.querySelector('.button_type_delete');
-
 
 
 
