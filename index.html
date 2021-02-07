@@ -48,22 +48,33 @@
   </div>
 
   <div class="popup">
-    <div class="popup__container">
 
-      <form class="form" method="POST" name="editProfileForm">
-        <h3 class="form__heading"> Редактировать профиль</h3>
+    <div class="popup__container popup__container_type_edit-profile">
+      <form class="form form_type_edit-profile" method="POST" name="editProfileForm">
+        <h3 class="form__heading">Редактировать профиль</h3>
         <input class="form__item form__item_element_name" type="text" name="name" placeholder="Имя" required>
-        <input class="form__item form__item_element_job" type="text" name="about" placeholder="О себе" required>
-        <button class="form__button form__button_type_submit" type="submit">Сохранить</button>
-        <button class="form__button form__button_type_close" type="reset" aria-label="Закрыть форму"></button>
+        <input class="form__item form__item_element_job" type="text" name="job" placeholder="О себе" required>
+        <button class="form__submit-button" type="submit">Сохранить</button>
+        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
       </form>
-
     </div>
+
+    <div class="popup__container popup__container_type_add-card">
+      <form class="form form_type_add-card" method="POST" name="addCardForm">
+        <h3 class="form__heading">Новое место</h3>
+        <input class="form__item form__item_element_name" type="text" name="name" placeholder="Название" required>
+        <input class="form__item form__item_element_image-link" type="text" name="image-link" placeholder="Ссылка на картинку" required>
+        <button class="form__submit-button" type="submit">Создать</button>
+        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+      </form>
+    </div>
+
   </div>
 
-  <template class='template-card'>
+  <template class='template__card'>
+
     <li class="card">
-      <div class="card__image"></div>
+      <button class="card__image" type="button"></button>
       <div class="card__content">
         <h2 class="card__heading"></h2>
         <button type="button" class="button button_type_like" aria-label="Лайк"></button>
@@ -73,7 +84,23 @@
 
   </template>
 
+  <template class="template__image-galerey">
+
+    <div class="popup__container popup__container_type_image-galerey popup__container_opend">
+      <figure class="figure">
+        <figcaption class="figure__figcaption">
+          <div class="figure__image"></div>
+          <p class="figure__caption"></p>
+        </figcaption>
+        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+      </figure>
+    </div>
+
+  </template>
+
+
   <script src="./scripts/main.js"></script>
+
 
 </body>
 

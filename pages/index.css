@@ -15,6 +15,7 @@
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_like.css);
 @import url(../blocks/button/_type/_active/button_type_like_active.css);
+@import url(../blocks/button/_type/button_type_close.css);
 @import url(../blocks/button/_type/button_type_delete.css);
 
 @import url(../blocks/profile/profile.css);
@@ -36,12 +37,20 @@
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_type/popup__container_type_image-galerey.css);
 @import url(../blocks/popup/_opend/popup_opend.css);
+@import url(../blocks/popup/__container/_opend/popup__container_opend.css);
+
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__item/_element/form__item_element_name.css);
 @import url(../blocks/form/__item/_element/form__item_element_job.css);
-@import url(../blocks/form/__button/form__button.css);
-@import url(../blocks/form/__button/_type/form__button_type_submit.css);
-@import url(../blocks/form/__button/_type/form__button_type_close.css);
+@import url(../blocks/form/__item/_element/form__item_element_image-link.css);
+@import url(../blocks/form/__submit-button/form__submit-button.css);
+
+@import url(../blocks/figure/figure.css);
+@import url(../blocks/figure/__figcaption/figure__figcaption.css);
+@import url(../blocks/figure/__image/figure__image.css);
+@import url(../blocks/figure/__caption/figure__caption.css);
+

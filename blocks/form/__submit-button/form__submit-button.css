@@ -1,4 +1,9 @@
-.form__button_type_submit {
+
+.form__submit-button {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transition: opacity .2s linear;
   width: calc(100% - 72px);
   height: 50px;
   margin-top: 48px;
@@ -11,13 +16,13 @@
 
 }
 
-.form__button_type_submit:hover {
+.form__submit-button:hover {
   opacity: .8;
 
 }
 
 @media screen and (max-width: 767px) {
-  .form__button_type_submit {
+  .form__submit-button {
     width: calc(100% - 44px);
     height: 46px;
     margin-top: 45px;
@@ -26,3 +31,5 @@
     line-height: 17px;
   }
 }
+
+

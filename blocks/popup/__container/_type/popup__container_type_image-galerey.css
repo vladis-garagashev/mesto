@@ -1,0 +1,12 @@
+.popup__container_type_image-galerey {
+  background: none;
+  color: #fff;
+  border-radius: 0;
+  width: 75vw;
+  height: 75vh;
+  margin: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+}
