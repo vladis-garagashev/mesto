@@ -2,12 +2,18 @@
 const popupContainer = document.querySelector('.popup');
 const profileEditPopup = document.querySelector('.popup__container_type_edit-profile');
 const addCardPopup = document.querySelector('.popup__container_type_add-card');
+const imagePreviePopup = document.querySelector('.popup__container_type_image-previe');
+
+// Находим элементы превью попапа в DOM
+let previeImage = imagePreviePopup.querySelector('.figure__image');
+let previeCaption = imagePreviePopup.querySelector('.figure__caption');
 
 // Находим кнопки открыть и закрыть в DOM
 const profileEditButton = document.querySelector('.button_type_edit');
-const profileEditCloseButton = profileEditPopup.querySelector('.button_type_close');
 const addCardButton = document.querySelector('.button_type_add');
+const profileEditCloseButton = profileEditPopup.querySelector('.button_type_close');
 const addCardCloseButton = addCardPopup.querySelector('.button_type_close');
+const previeCloseButton = imagePreviePopup.querySelector('.button_type_close')
 
 // Находим форму редактирования профиля и добавления карточек в DOM
 const profileEditForm = profileEditPopup.querySelector('.form_type_edit-profile');
@@ -28,9 +34,6 @@ const cardsList = document.querySelector('.cards__list');
 
 // Находим шаблон карточки в DOM
 const cardTemplate = document.querySelector('.template__card').content;
-
-// Находим шаблон попапа картинки в DOM
-const imagePreviePopupTemplate = document.querySelector('.template__image-previe').content;
 
 //------------------------------------------------------------------------------------------------------
 
@@ -81,29 +84,19 @@ function addCard(element) {
   cardImage.addEventListener('click', evt => {
 
     evt.preventDefault()
-    // Клонируем шаблон с попапом
-    const imagePreviePopup = imagePreviePopupTemplate.cloneNode(true);
-    const closePopup = imagePreviePopup.querySelector('.button_type_close');
-    const popupImage = imagePreviePopup.querySelector('.figure__image');
-    const popupCaption = imagePreviePopup.querySelector('.figure__caption');
 
+    previeImage.setAttribute('src', `${cardImage.getAttribute('src')}`);
+    previeImage.setAttribute('alt', `${cardImage.getAttribute('alt')}`);
+    previeCaption.textContent = cardHeading.textContent
+
+    imagePreviePopup.classList.toggle('popup__container_opend');
     popupContainer.classList.toggle('popup_opend');
 
-    popupImage.setAttribute('src', `${cardImage.getAttribute('src')}`);
-    popupImage.setAttribute('alt', `${cardImage.getAttribute('alt')}`);
-    popupCaption.textContent = cardHeading.textContent
-
-    closePopup.addEventListener('click', evt => {
-      evt.target.closest('.popup__container').remove();
-      popupContainer.classList.toggle('popup_opend');
-    })
-
-    popupContainer.append(imagePreviePopup);
-  })
+  });
 
   cardLikeButton.addEventListener('click', evt => {
     evt.target.classList.toggle('button_type_like_active');
-  })
+  });
 
   cardDeleteButton.addEventListener('click', evt => {
     evt.target.closest('.card').remove();
@@ -118,7 +111,7 @@ initialCards.forEach(addCard)
 
 //------------------------------------------------------------------------------------------------------
 
-// Обработчик открытия и закрытия редактора профиля
+// Обработчик открытия и закрытия попапов
 
 function togglePopup(evt) {
 
@@ -138,6 +131,7 @@ function togglePopup(evt) {
     popupContainer.classList.remove('popup_opend');
     profileEditPopup.classList.remove('popup__container_opend');
     addCardPopup.classList.remove('popup__container_opend');
+    imagePreviePopup.classList.remove('popup__container_opend');
 
   }
 
@@ -179,14 +173,10 @@ function formSubmitHandler(evt) {
 
 // Слушатели открытия и закрытия попапа
 profileEditButton.addEventListener('click', togglePopup);
-profileEditCloseButton.addEventListener('click', togglePopup);
 addCardButton.addEventListener('click', togglePopup);
+profileEditCloseButton.addEventListener('click', togglePopup);
 addCardCloseButton.addEventListener('click', togglePopup);
+previeCloseButton.addEventListener('click', togglePopup)
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', formSubmitHandler);
 addCardForm.addEventListener('submit', formSubmitHandler);
-
-
-
-
-
