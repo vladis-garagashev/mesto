@@ -5,8 +5,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
+  transform:translateY(-100vh);
+
+  transition-property: opacity, transform;
+  transition-duration: .2s, 0s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s, .1s;
+
 }

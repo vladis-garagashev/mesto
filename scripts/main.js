@@ -126,11 +126,11 @@ function profileEditTogglePopup() {
     jobInput.value = profileJob.textContent;
 
     popupContainer.classList.toggle('popup_opend');
-    profileEditPopup.classList.toggle('popup_opend');
+    profileEditPopup.classList.toggle('popup__container_opend');
 
   } else {
     popupContainer.classList.toggle('popup_opend');
-    profileEditPopup.classList.toggle('popup_opend');
+    profileEditPopup.classList.toggle('popup__container_opend');
 
   }
 }
@@ -139,7 +139,7 @@ function profileEditTogglePopup() {
 function addCardTogglePopup() {
 
   popupContainer.classList.toggle('popup_opend');
-  addCardPopup.classList.toggle('popup_opend');
+  addCardPopup.classList.toggle('popup__container_opend');
 
 }
 
