@@ -74,7 +74,8 @@ function addCard(element) {
 
 
   cardHeading.textContent = element.name;
-  cardImage.setAttribute('style', `background-image: url(${element.link})`);
+  cardImage.setAttribute('src', `${element.link}`);
+  cardImage.setAttribute('alt', `${element.name}`);
 
   // Добавляем попап для картинки
   cardImage.addEventListener('click', evt => {
@@ -88,7 +89,8 @@ function addCard(element) {
 
     popupContainer.classList.toggle('popup_opend');
 
-    popupImage.setAttribute('style', `${cardImage.getAttribute('style')}`);
+    popupImage.setAttribute('src', `${cardImage.getAttribute('src')}`);
+    popupImage.setAttribute('alt', `${cardImage.getAttribute('alt')}`);
     popupCaption.textContent = cardHeading.textContent
 
     closePopup.addEventListener('click', evt => {

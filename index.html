@@ -74,12 +74,12 @@
   <template class='template__card'>
 
     <li class="card">
-      <button class="card__image" type="button"></button>
+      <a><img class="card__image"></a>
       <div class="card__content">
         <h2 class="card__heading"></h2>
         <button type="button" class="button button_type_like" aria-label="Лайк"></button>
+        <button  type="button" class="button button_type_delete" aria-label="Удалить карточку"></button>
       </div>
-      <button  type="button" class="button button_type_delete" aria-label="Удалить карточку"></button>
     </li>
 
   </template>
@@ -89,7 +89,7 @@
     <div class="popup__container popup__container_type_image-previe popup__container_opend">
       <figure class="figure">
         <figcaption class="figure__figcaption">
-          <div class="figure__image"></div>
+          <img class="figure__image">
           <p class="figure__caption"></p>
         </figcaption>
         <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>

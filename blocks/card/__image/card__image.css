@@ -2,9 +2,8 @@
   width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  object-fit: cover;
+  object-position: center;
   border: none;
   outline: none;
   cursor: pointer;
