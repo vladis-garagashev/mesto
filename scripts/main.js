@@ -19,19 +19,18 @@ const jobInput = profileEditForm.querySelector('.form__item_element_job');
 const imageNameImput = addCardForm.querySelector('.form__item_element_name');
 const imageLinkImput = addCardForm.querySelector('.form__item_element_image-link');
 
-// Выберите элементы, куда должны быть вставлены значения полей
+// Выбераем элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 // Находим контейнер с карточками в DOM
 const cardsList = document.querySelector('.cards__list');
 
-
 // Находим шаблон карточки в DOM
 const cardTemplate = document.querySelector('.template__card').content;
 
 // Находим шаблон попапа картинки в DOM
-const galereyPopupTemplate = document.querySelector('.template__image-galerey').content;
+const imagePreviePopupTemplate = document.querySelector('.template__image-previe').content;
 
 //------------------------------------------------------------------------------------------------------
 
@@ -82,10 +81,10 @@ function addCard(element) {
 
     evt.preventDefault()
     // Клонируем шаблон с попапом
-    const galereyPopup = galereyPopupTemplate.cloneNode(true);
-    const closePopup = galereyPopup.querySelector('.button_type_close');
-    const popupImage = galereyPopup.querySelector('.figure__image');
-    const popupCaption = galereyPopup.querySelector('.figure__caption');
+    const imagePreviePopup = imagePreviePopupTemplate.cloneNode(true);
+    const closePopup = imagePreviePopup.querySelector('.button_type_close');
+    const popupImage = imagePreviePopup.querySelector('.figure__image');
+    const popupCaption = imagePreviePopup.querySelector('.figure__caption');
 
     popupContainer.classList.toggle('popup_opend');
 
@@ -97,7 +96,7 @@ function addCard(element) {
       popupContainer.classList.toggle('popup_opend');
     })
 
-    popupContainer.append(galereyPopup);
+    popupContainer.append(imagePreviePopup);
   })
 
   cardLikeButton.addEventListener('click', evt => {
@@ -118,28 +117,27 @@ initialCards.forEach(addCard)
 //------------------------------------------------------------------------------------------------------
 
 // Обработчик открытия и закрытия редактора профиля
-function profileEditTogglePopup() {
 
-  if (!profileEditPopup.classList.contains('popup_opend')) {
+function togglePopup(evt) {
+
+  if (evt.target === profileEditButton) {
 
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 
-    popupContainer.classList.toggle('popup_opend');
-    profileEditPopup.classList.toggle('popup__container_opend');
+    popupContainer.classList.add('popup_opend');
+    profileEditPopup.classList.add('popup__container_opend');
+
+  } else if (evt.target === addCardButton) {
+    popupContainer.classList.add('popup_opend');
+    addCardPopup.classList.add('popup__container_opend');
 
   } else {
-    popupContainer.classList.toggle('popup_opend');
-    profileEditPopup.classList.toggle('popup__container_opend');
+    popupContainer.classList.remove('popup_opend');
+    profileEditPopup.classList.remove('popup__container_opend');
+    addCardPopup.classList.remove('popup__container_opend');
 
   }
-}
-
-// Обработчик открытия и закрытия добавления карточек
-function addCardTogglePopup() {
-
-  popupContainer.classList.toggle('popup_opend');
-  addCardPopup.classList.toggle('popup__container_opend');
 
 }
 
@@ -155,8 +153,6 @@ function formSubmitHandler(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    profileEditTogglePopup()
-
   } else if (evt.target === addCardForm) {
     let cardMassive = [
       {
@@ -171,19 +167,19 @@ function formSubmitHandler(evt) {
     imageLinkImput.value = '';
     cardMassive = []
 
-    addCardTogglePopup()
-
   }
+
+  togglePopup(evt)
 
 }
 
 //------------------------------------------------------------------------------------------------------
 
 // Слушатели открытия и закрытия попапа
-profileEditButton.addEventListener('click', profileEditTogglePopup);
-profileEditCloseButton.addEventListener('click', profileEditTogglePopup);
-addCardButton.addEventListener('click', addCardTogglePopup);
-addCardCloseButton.addEventListener('click', addCardTogglePopup);
+profileEditButton.addEventListener('click', togglePopup);
+profileEditCloseButton.addEventListener('click', togglePopup);
+addCardButton.addEventListener('click', togglePopup);
+addCardCloseButton.addEventListener('click', togglePopup);
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', formSubmitHandler);
 addCardForm.addEventListener('submit', formSubmitHandler);
