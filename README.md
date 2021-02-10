@@ -28,7 +28,7 @@
 profile и cards через grid сетки, с использоавнием grid-template-areas
 где это необходимо.
 * Открытие и закрытие попапов реализовал через функции обработчик
-````js 'profileEditTogglePopup(), addCardTogglePopup, imagePrevieTogglePopup````,
+````js profileEditTogglePopup(), addCardTogglePopup, imagePrevieTogglePopup````,
 котокую привязал к кнопкам через addEventListener. При клике на кнопки, функции
 проверяют наличие класса opend_popup и добавляют его(при открытии) либо удаляют(при
 закрытии).
