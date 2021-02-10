@@ -1,6 +1,6 @@
 // Находим попапы в DOM
 const profileEditPopup = document.querySelector('#popupProfile');
-const addCardPopup = document.querySelector('#popupCard');
+const cardPopup = document.querySelector('#popupCard');
 const imagePreviePopup = document.querySelector('#popupImagePrevie');
 
 // Находим элементы превью попапа в DOM
@@ -11,12 +11,12 @@ const previeCaption = imagePreviePopup.querySelector('.figure__caption');
 const profileEditButton = document.querySelector('.button_type_edit');
 const addCardButton = document.querySelector('.button_type_add');
 const profileEditCloseButton = profileEditPopup.querySelector('.button_type_close');
-const addCardCloseButton = addCardPopup.querySelector('.button_type_close');
+const addCardCloseButton = cardPopup.querySelector('.button_type_close');
 const previeCloseButton = imagePreviePopup.querySelector('.button_type_close')
 
 // Находим форму редактирования профиля и добавления карточек в DOM
 const profileEditForm = profileEditPopup.querySelector('.form_type_edit-profile');
-const addCardForm = addCardPopup.querySelector('.form_type_add-card');
+const addCardForm = cardPopup.querySelector('.form_type_add-card');
 
 // Находим поля формы в DOM
 const nameInput = profileEditForm.querySelector('.form__item_element_name');
@@ -88,7 +88,7 @@ function createCard(element) {
     previeImage.setAttribute('alt', element.name);
     previeCaption.textContent = element.name
 
-    imagePrevieTogglePopup()
+    openPopup(imagePreviePopup)
 
   });
 
@@ -113,27 +113,12 @@ function addCard(massive) {
 
 // Обработчики открытия и закрытия попапов
 
-function profileEditTogglePopup() {
-
-  if(!profileEditPopup.classList.contains('poopup_opend')) {
-
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-
-    profileEditPopup.classList.toggle('popup_opend');
-
-  } else {
-    profileEditPopup.classList.toggle('popup_opend');
-  }
-
+function openPopup(popup) {
+  popup.classList.add('popup_opend');
 };
 
-function addCardTogglePopup() {
-  addCardPopup.classList.toggle('popup_opend');
-};
-
-function imagePrevieTogglePopup() {
-  imagePreviePopup.classList.toggle('popup_opend');
+function closePopup(popup) {
+  popup.classList.remove('popup_opend');
 };
 
 //------------------------------------------------------------------------------------------------------
@@ -146,7 +131,7 @@ function profileFormSubmitHandler(evt) {
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  profileEditTogglePopup();
+  closePopup(profileEditPopup);
 
 };
 
@@ -165,7 +150,7 @@ function cardFormSubmitHandler(evt) {
   imageNameImput.value = '';
   imageLinkImput.value = '';
   cardMassive = [];
-  addCardTogglePopup();
+  closePopup(cardPopup);
 
 };
 
@@ -176,13 +161,28 @@ function cardFormSubmitHandler(evt) {
 addCard(initialCards);
 
 // Слушатели открытия и закрытия попапа
-profileEditButton.addEventListener('click', profileEditTogglePopup);
-profileEditCloseButton.addEventListener('click', profileEditTogglePopup);
 
-addCardButton.addEventListener('click', addCardTogglePopup);
-addCardCloseButton.addEventListener('click', addCardTogglePopup);
+profileEditButton.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopup(profileEditPopup)
+});
 
-previeCloseButton.addEventListener('click', imagePrevieTogglePopup);
+profileEditCloseButton.addEventListener('click', () => {
+  closePopup(profileEditPopup)
+});
+
+addCardButton.addEventListener('click', () => {
+  openPopup(cardPopup)
+});
+
+addCardCloseButton.addEventListener('click', () => {
+  closePopup(cardPopup)
+});
+
+previeCloseButton.addEventListener('click', () => {
+  closePopup(imagePreviePopup)
+});
 
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', profileFormSubmitHandler);
