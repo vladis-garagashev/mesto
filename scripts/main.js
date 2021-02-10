@@ -1,12 +1,11 @@
 // Находим попапы в DOM
-const popupContainer = document.querySelector('.popup');
-const profileEditPopup = document.querySelector('.popup__container_type_edit-profile');
-const addCardPopup = document.querySelector('.popup__container_type_add-card');
-const imagePreviePopup = document.querySelector('.popup__container_type_image-previe');
+const profileEditPopup = document.querySelector('#popupProfile');
+const addCardPopup = document.querySelector('#popupCard');
+const imagePreviePopup = document.querySelector('#popupImagePrevie');
 
 // Находим элементы превью попапа в DOM
-let previeImage = imagePreviePopup.querySelector('.figure__image');
-let previeCaption = imagePreviePopup.querySelector('.figure__caption');
+const previeImage = imagePreviePopup.querySelector('.figure__image');
+const previeCaption = imagePreviePopup.querySelector('.figure__caption');
 
 // Находим кнопки открыть и закрыть в DOM
 const profileEditButton = document.querySelector('.button_type_edit');
@@ -35,39 +34,40 @@ const cardsList = document.querySelector('.cards__list');
 // Находим шаблон карточки в DOM
 const cardTemplate = document.querySelector('.template__card').content;
 
-//------------------------------------------------------------------------------------------------------
-
-// Добавляем дефолтные карточки
-// Создаем список карточек
+// Создаем список дефолтных карточек карточек
 const initialCards = [
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
-//Обработчик добавления карточки
-function addCard(element) {
+//------------------------------------------------------------------------------------------------------
+
+
+//Обработчик создания карточки
+function createCard(element) {
+
   // Клонируем шаблон карточки
   const card = cardTemplate.cloneNode(true);
   const cardHeading = card.querySelector('.card__heading');
@@ -75,22 +75,20 @@ function addCard(element) {
   const cardLikeButton = card.querySelector('.button_type_like');
   const cardDeleteButton = card.querySelector('.button_type_delete');
 
-
   cardHeading.textContent = element.name;
-  cardImage.setAttribute('src', `${element.link}`);
-  cardImage.setAttribute('alt', `${element.name}`);
+  cardImage.setAttribute('src', element.link);
+  cardImage.setAttribute('alt', element.name);
 
   // Добавляем попап для картинки
   cardImage.addEventListener('click', evt => {
 
     evt.preventDefault()
 
-    previeImage.setAttribute('src', `${cardImage.getAttribute('src')}`);
-    previeImage.setAttribute('alt', `${cardImage.getAttribute('alt')}`);
-    previeCaption.textContent = cardHeading.textContent
+    previeImage.setAttribute('src', element.link);
+    previeImage.setAttribute('alt', element.name);
+    previeCaption.textContent = element.name
 
-    imagePreviePopup.classList.toggle('popup__container_opend');
-    popupContainer.classList.toggle('popup_opend');
+    imagePrevieTogglePopup()
 
   });
 
@@ -102,81 +100,90 @@ function addCard(element) {
     evt.target.closest('.card').remove();
   });
 
-  cardsList.prepend(card);
+  return card;
 
-}
+};
 
-// Загружаем дефолтные карточки на страницу
-initialCards.forEach(addCard)
+//Обработчик добавления карточки
+function addCard(massive) {
+  cardsList.prepend(...massive.map(createCard));
+};
 
 //------------------------------------------------------------------------------------------------------
 
-// Обработчик открытия и закрытия попапов
+// Обработчики открытия и закрытия попапов
 
-function togglePopup(evt) {
+function profileEditTogglePopup() {
 
-  if (evt.target === profileEditButton) {
+  if(!profileEditPopup.classList.contains('poopup_opend')) {
 
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 
-    popupContainer.classList.add('popup_opend');
-    profileEditPopup.classList.add('popup__container_opend');
-
-  } else if (evt.target === addCardButton) {
-    popupContainer.classList.add('popup_opend');
-    addCardPopup.classList.add('popup__container_opend');
+    profileEditPopup.classList.toggle('popup_opend');
 
   } else {
-    popupContainer.classList.remove('popup_opend');
-    profileEditPopup.classList.remove('popup__container_opend');
-    addCardPopup.classList.remove('popup__container_opend');
-    imagePreviePopup.classList.remove('popup__container_opend');
-
+    profileEditPopup.classList.toggle('popup_opend');
   }
 
-}
+};
+
+function addCardTogglePopup() {
+  addCardPopup.classList.toggle('popup_opend');
+};
+
+function imagePrevieTogglePopup() {
+  imagePreviePopup.classList.toggle('popup_opend');
+};
 
 //------------------------------------------------------------------------------------------------------
 
-// Обработчик «отправки» формы
-function formSubmitHandler(evt) {
+// Обработчики «отправки» форм
+
+function profileFormSubmitHandler(evt) {
 
   evt.preventDefault();
 
-  if (evt.target === editProfileForm) {
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  profileEditTogglePopup();
 
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
+};
 
-  } else if (evt.target === addCardForm) {
-    let cardMassive = [
-      {
-        name: `${imageNameImput.value}`,
-        link: `${imageLinkImput.value}`
-      }
-    ]
+function cardFormSubmitHandler(evt) {
 
-    cardMassive.forEach(addCard)
+  evt.preventDefault();
 
-    imageNameImput.value = '';
-    imageLinkImput.value = '';
-    cardMassive = []
+  let cardMassive = [
+    {
+      name: `${imageNameImput.value}`,
+      link: `${imageLinkImput.value}`
+    }
+  ];
 
-  }
+  addCard(cardMassive);
+  imageNameImput.value = '';
+  imageLinkImput.value = '';
+  cardMassive = [];
+  addCardTogglePopup();
 
-  togglePopup(evt)
-
-}
+};
 
 //------------------------------------------------------------------------------------------------------
 
+
+// Загружаем дефолтные карточки на страницу
+addCard(initialCards);
+
 // Слушатели открытия и закрытия попапа
-profileEditButton.addEventListener('click', togglePopup);
-addCardButton.addEventListener('click', togglePopup);
-profileEditCloseButton.addEventListener('click', togglePopup);
-addCardCloseButton.addEventListener('click', togglePopup);
-previeCloseButton.addEventListener('click', togglePopup)
+profileEditButton.addEventListener('click', profileEditTogglePopup);
+profileEditCloseButton.addEventListener('click', profileEditTogglePopup);
+
+addCardButton.addEventListener('click', addCardTogglePopup);
+addCardCloseButton.addEventListener('click', addCardTogglePopup);
+
+previeCloseButton.addEventListener('click', imagePrevieTogglePopup);
+
 // Слушатели обработчика формы
-profileEditForm.addEventListener('submit', formSubmitHandler);
-addCardForm.addEventListener('submit', formSubmitHandler);
+profileEditForm.addEventListener('submit', profileFormSubmitHandler);
+addCardForm.addEventListener('submit', cardFormSubmitHandler);
