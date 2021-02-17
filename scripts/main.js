@@ -15,14 +15,14 @@ const addCardCloseButton = cardPopup.querySelector('.button_type_close');
 const previeCloseButton = imagePreviePopup.querySelector('.button_type_close')
 
 // Находим форму редактирования профиля и добавления карточек в DOM
-const profileEditForm = profileEditPopup.querySelector('.form_type_edit-profile');
-const addCardForm = cardPopup.querySelector('.form_type_add-card');
+const profileEditForm = document.forms.editProfileForm;
+const addCardForm = document.forms.addCardForm;
 
 // Находим поля формы в DOM
-const nameInput = profileEditForm.querySelector('.form__item_element_name');
-const jobInput = profileEditForm.querySelector('.form__item_element_job');
-const imageNameImput = addCardForm.querySelector('.form__item_element_name');
-const imageLinkImput = addCardForm.querySelector('.form__item_element_image-link');
+const nameInput = profileEditForm.elements.name;
+const jobInput = profileEditForm.elements.job;
+const imageNameInput = addCardForm.elements.name;
+const imageLinkInput = addCardForm.elements.imageLink;
 
 // Выбераем элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__name');
@@ -72,8 +72,6 @@ function createCard(element) {
   const card = cardTemplate.cloneNode(true);
   const cardHeading = card.querySelector('.card__heading');
   const cardImage = card.querySelector('.card__image');
-  const cardLikeButton = card.querySelector('.button_type_like');
-  const cardDeleteButton = card.querySelector('.button_type_delete');
 
   cardHeading.textContent = element.name;
   cardImage.setAttribute('src', element.link);
@@ -90,14 +88,6 @@ function createCard(element) {
 
     openPopup(imagePreviePopup)
 
-  });
-
-  cardLikeButton.addEventListener('click', evt => {
-    evt.target.classList.toggle('button_type_like_active');
-  });
-
-  cardDeleteButton.addEventListener('click', evt => {
-    evt.target.closest('.card').remove();
   });
 
   return card;
@@ -141,15 +131,13 @@ function cardFormSubmitHandler(evt) {
 
   let cardMassive = [
     {
-      name: `${imageNameImput.value}`,
-      link: `${imageLinkImput.value}`
+      name: `${imageNameInput.value}`,
+      link: `${imageLinkInput.value}`
     }
   ];
 
   addCard(cardMassive);
-  imageNameImput.value = '';
-  imageLinkImput.value = '';
-  cardMassive = [];
+  addCardForm.reset()
   closePopup(cardPopup);
 
 };
@@ -187,3 +175,18 @@ previeCloseButton.addEventListener('click', () => {
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', profileFormSubmitHandler);
 addCardForm.addEventListener('submit', cardFormSubmitHandler);
+
+// Слушатель проставки лайков карточкам
+cardsList.addEventListener('click', (evt) => {
+
+  if (evt.target.classList.contains('button_type_like')) {
+    evt.target.classList.toggle('button_type_like_active');
+  }
+})
+
+// Слушатель удаления карточки
+cardsList.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('button_type_delete')) {
+    evt.target.closest('.card').remove();
+  }
+})
