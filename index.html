@@ -50,10 +50,19 @@
   <article class="popup" id="popupProfile">
 
     <div class="popup__container">
-      <form class="form form_type_edit-profile" method="POST" name="editProfileForm">
+      <form class="form form_type_edit-profile" method="POST" name="editProfileForm" novalidate>
         <h3 class="form__heading">Редактировать профиль</h3>
-        <input class="form__item form__item_element_name" type="text" name="name" placeholder="Имя" required>
-        <input class="form__item form__item_element_job" type="text" name="job" placeholder="О себе" required>
+
+        <section class="form__section">
+          <input class="form__item form__item_element_name" type="text" name="name" id="name" placeholder="Имя" minlength="2" maxlength="40" required>
+          <span class="form__item-error id="name-error""></span>
+        </section>
+
+        <section class="form__section">
+          <input class="form__item form__item_element_job" type="text" name="job" id="job" placeholder="О себе" minlength="2" maxlength="200" required>
+          <span class="form__item-error" id="job-error"></span>
+        </section>
+
         <button class="form__submit-button" type="submit">Сохранить</button>
         <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
       </form>
@@ -64,10 +73,20 @@
   <artticle class="popup" id="popupCard">
 
     <div class="popup__container">
-      <form class="form form_type_add-card" method="POST" name="addCardForm">
+
+      <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
         <h3 class="form__heading">Новое место</h3>
-        <input class="form__item form__item_element_name" type="text" name="name" placeholder="Название" required>
-        <input class="form__item form__item_element_image-link" type="text" name="imageLink" placeholder="Ссылка на картинку" required>
+
+        <section class="form__section">
+          <input class="form__item form__item_element_name" type="text" name="name" id="name" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="form__item-error" id="name-error"></span>
+        </section>
+
+        <section class="form__section">
+          <input class="form__item form__item_element_image-link" type="url" name="imageLink" id="imageLink" placeholder="Ссылка на картинку" required>
+          <span class="form__item-error" id="imageLink-error"></span>
+        </section>
+
         <button class="form__submit-button" type="submit">Создать</button>
         <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
       </form>
@@ -103,6 +122,7 @@
   </template>
 
   <script src="./scripts/main.js"></script>
+  <script src="./scripts/validate.js"></script>
 
 
 </body>
