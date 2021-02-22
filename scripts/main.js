@@ -1,4 +1,5 @@
 // Находим попапы в DOM
+const popupList = Array.from(document.querySelectorAll('.popup'));
 const profileEditPopup = document.querySelector('#popupProfile');
 const cardPopup = document.querySelector('#popupCard');
 const imagePreviePopup = document.querySelector('#popupImagePrevie');
@@ -111,6 +112,22 @@ function closePopup(popup) {
   popup.classList.remove('popup_opend');
 };
 
+// Обработчик закрытия попапа по оверлею
+
+function overlayClosePopup(evt, popupElement) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupElement)
+  };
+};
+
+// Обработчик закрытия попапа по клавише Esc
+
+function escapeKeyClosePopup(evt, popupElement) {
+  if (evt.key === 'Escape') {
+    closePopup(popupElement)
+  };
+};
+
 //------------------------------------------------------------------------------------------------------
 
 // Обработчики «отправки» форм
@@ -170,6 +187,31 @@ addCardCloseButton.addEventListener('click', () => {
 
 previeCloseButton.addEventListener('click', () => {
   closePopup(imagePreviePopup);
+});
+
+// Слушатели закрытия попапа по клавише Esc
+
+nameInput.addEventListener('keydown', (evt) => {
+  escapeKeyClosePopup(evt, profileEditPopup)
+});
+
+jobInput.addEventListener('keydown', (evt) => {
+  escapeKeyClosePopup(evt, profileEditPopup)
+});
+
+imageNameInput.addEventListener('keydown', (evt) => {
+  escapeKeyClosePopup(evt, addCardPopup)
+});
+
+imageLinkInput.addEventListener('keydown', (evt) => {
+  escapeKeyClosePopup(evt, addCardPopup)
+});
+
+// Проходим по всем попапами и вешаем слушатели закрытия попапа по оверлею
+popupList.forEach(popupElement => {
+  popupElement.addEventListener('click', (evt) => {
+    overlayClosePopup(evt, popupElement)
+  });
 });
 
 // Слушатели обработчика формы
