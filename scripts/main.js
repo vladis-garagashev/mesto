@@ -1,4 +1,5 @@
 // Находим попапы в DOM
+const popupList = document.querySelectorAll('.popup')
 const profileEditPopup = document.querySelector('#popupProfile');
 const cardPopup = document.querySelector('#popupCard');
 const imagePreviePopup = document.querySelector('#popupImagePrevie');
@@ -7,12 +8,9 @@ const imagePreviePopup = document.querySelector('#popupImagePrevie');
 const previeImage = imagePreviePopup.querySelector('.figure__image');
 const previeCaption = imagePreviePopup.querySelector('.figure__caption');
 
-// Находим кнопки открыть и закрыть в DOM
+// Находим кнопки открыть попап  в DOM
 const profileEditButton = document.querySelector('.button_type_edit');
 const addCardButton = document.querySelector('.button_type_add');
-const profileEditCloseButton = profileEditPopup.querySelector('.button_type_close');
-const addCardCloseButton = cardPopup.querySelector('.button_type_close');
-const previeCloseButton = imagePreviePopup.querySelector('.button_type_close')
 
 // Находим форму редактирования профиля и добавления карточек в DOM
 const profileEditForm = document.forms.editProfileForm;
@@ -104,43 +102,20 @@ function addCard(massive) {
 // Обработчики открытия и закрытия попапов
 
 function openPopup(popup) {
-  popup.classList.add('popup_opend');
-
-  document.addEventListener('keydown', (evt) => {
-    escapeKeyClosePopup(evt, popup);
-  });
-
-  popup.addEventListener('click', (evt) => {
-    overlayClosePopup(evt, popup);
-  });
-
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 };
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opend');
-
-  document.removeEventListener('keydown', (evt) => {
-    escapeKeyClosePopup(evt, popup);
-  });
-
-  popup.removeEventListener('click', (evt) => {
-    overlayClosePopup(evt, popup);
-  });
-  
-};
-
-// Обработчик закрытия попапа по оверлею
-
-function overlayClosePopup(evt, popup) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popup)
-  };
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 };
 
 // Обработчик закрытия попапа по клавише Esc
-function escapeKeyClosePopup(evt, popup) {
+function closeByEscape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(popup)
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup)
   };
 };
 
@@ -162,7 +137,7 @@ function cardFormSubmitHandler(evt) {
 
   evt.preventDefault();
 
-  let cardMassive = [
+  const cardMassive = [
     {
       name: `${imageNameInput.value}`,
       link: `${imageLinkInput.value}`
@@ -189,20 +164,31 @@ profileEditButton.addEventListener('click', () => {
   openPopup(profileEditPopup);
 });
 
-profileEditCloseButton.addEventListener('click', () => {
-  closePopup(profileEditPopup);
-});
-
 addCardButton.addEventListener('click', () => {
   openPopup(cardPopup);
 });
 
-addCardCloseButton.addEventListener('click', () => {
-  closePopup(cardPopup);
-});
+popupList.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target.classList.contains('popup_opened') ) {
+        closePopup(popup)
+    };
 
-previeCloseButton.addEventListener('click', () => {
-  closePopup(imagePreviePopup);
+    if (evt.target.classList.contains('button_type_close')) {
+      closePopup(popup)
+    };
+
+    /* Можно ли использовать такую конструкцию? Или лучше все таки разбить на 2 if
+
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('button_type_close')) {
+        closePopup(popup)
+    };
+    
+      После ревью я удалю все ненужные комментарии)
+    */
+
+  });
+
 });
 
 // Слушатели обработчика формы
