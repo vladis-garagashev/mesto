@@ -1,5 +1,4 @@
 // Находим попапы в DOM
-const popupList = Array.from(document.querySelectorAll('.popup'));
 const profileEditPopup = document.querySelector('#popupProfile');
 const cardPopup = document.querySelector('#popupCard');
 const imagePreviePopup = document.querySelector('#popupImagePrevie');
@@ -106,25 +105,42 @@ function addCard(massive) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opend');
+
+  document.addEventListener('keydown', (evt) => {
+    escapeKeyClosePopup(evt, popup);
+  });
+
+  popup.addEventListener('click', (evt) => {
+    overlayClosePopup(evt, popup);
+  });
+
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opend');
+
+  document.removeEventListener('keydown', (evt) => {
+    escapeKeyClosePopup(evt, popup);
+  });
+
+  popup.removeEventListener('click', (evt) => {
+    overlayClosePopup(evt, popup);
+  });
+  
 };
 
 // Обработчик закрытия попапа по оверлею
 
-function overlayClosePopup(evt, popupElement) {
+function overlayClosePopup(evt, popup) {
   if (evt.target === evt.currentTarget) {
-    closePopup(popupElement)
+    closePopup(popup)
   };
 };
 
 // Обработчик закрытия попапа по клавише Esc
-
-function escapeKeyClosePopup(evt, popupElement) {
+function escapeKeyClosePopup(evt, popup) {
   if (evt.key === 'Escape') {
-    closePopup(popupElement)
+    closePopup(popup)
   };
 };
 
@@ -187,31 +203,6 @@ addCardCloseButton.addEventListener('click', () => {
 
 previeCloseButton.addEventListener('click', () => {
   closePopup(imagePreviePopup);
-});
-
-// Слушатели закрытия попапа по клавише Esc
-
-nameInput.addEventListener('keydown', (evt) => {
-  escapeKeyClosePopup(evt, profileEditPopup)
-});
-
-jobInput.addEventListener('keydown', (evt) => {
-  escapeKeyClosePopup(evt, profileEditPopup)
-});
-
-imageNameInput.addEventListener('keydown', (evt) => {
-  escapeKeyClosePopup(evt, addCardPopup)
-});
-
-imageLinkInput.addEventListener('keydown', (evt) => {
-  escapeKeyClosePopup(evt, addCardPopup)
-});
-
-// Проходим по всем попапами и вешаем слушатели закрытия попапа по оверлею
-popupList.forEach(popupElement => {
-  popupElement.addEventListener('click', (evt) => {
-    overlayClosePopup(evt, popupElement)
-  });
 });
 
 // Слушатели обработчика формы
