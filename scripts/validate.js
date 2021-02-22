@@ -38,10 +38,10 @@ const checkInputValidity = (formElement, inputElement) => {
 const toggleButtonState = (inputList, buttonElement) => {
 
   // Проверяем поля на валидность
-  const hasInvalidInput = inputList.some(inputElement => inputElement.validity.valid);
+  const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
   // Переключаем состояние кнопки
-  if(!hasInvalidInput) {
+  if(hasInvalidInput) {
     buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add('form__submit-button_disabled');
 
