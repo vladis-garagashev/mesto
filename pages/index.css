@@ -45,10 +45,12 @@
 @import url(../blocks/form/__section/form__section.css);
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__item/form__item.css);
+@import url(../blocks/form/__item/_type/form__item_type_error.css);
 @import url(../blocks/form/__item/_element/form__item_element_name.css);
 @import url(../blocks/form/__item/_element/form__item_element_job.css);
 @import url(../blocks/form/__item/_element/form__item_element_image-link.css);
 @import url(../blocks/form/__item-error/form__item-error.css);
+@import url(../blocks/form/__item-error/_visible/form__item-error_visible.css);
 @import url(../blocks/form/__submit-button/form__submit-button.css);
 @import url(../blocks/form/__submit-button/_disabled/form__submit-button_disabled.css);
 

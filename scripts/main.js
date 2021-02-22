@@ -19,10 +19,10 @@ const profileEditForm = document.forms.editProfileForm;
 const addCardForm = document.forms.addCardForm;
 
 // Находим поля формы в DOM
-const nameInput = profileEditForm.elements.name;
-const jobInput = profileEditForm.elements.job;
-const imageNameInput = addCardForm.elements.name;
-const imageLinkInput = addCardForm.elements.imageLink;
+const nameInput = profileEditForm.querySelector('.form__item_element_name');
+const jobInput = profileEditForm.querySelector('.form__item_element_job');;
+const imageNameInput = addCardForm.querySelector('.form__item_element_name');;
+const imageLinkInput = addCardForm.querySelector('.form__item_element_image-link');;
 
 // Выбераем элементы, куда должны быть вставлены значения полей
 const profileName = document.querySelector('.profile__name');
@@ -137,7 +137,7 @@ function cardFormSubmitHandler(evt) {
   ];
 
   addCard(cardMassive);
-  addCardForm.reset()
+  addCardForm.reset();
   closePopup(cardPopup);
 
 };
@@ -153,23 +153,23 @@ addCard(initialCards);
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  openPopup(profileEditPopup)
+  openPopup(profileEditPopup);
 });
 
 profileEditCloseButton.addEventListener('click', () => {
-  closePopup(profileEditPopup)
+  closePopup(profileEditPopup);
 });
 
 addCardButton.addEventListener('click', () => {
-  openPopup(cardPopup)
+  openPopup(cardPopup);
 });
 
 addCardCloseButton.addEventListener('click', () => {
-  closePopup(cardPopup)
+  closePopup(cardPopup);
 });
 
 previeCloseButton.addEventListener('click', () => {
-  closePopup(imagePreviePopup)
+  closePopup(imagePreviePopup);
 });
 
 // Слушатели обработчика формы
@@ -178,15 +178,14 @@ addCardForm.addEventListener('submit', cardFormSubmitHandler);
 
 // Слушатель проставки лайков карточкам
 cardsList.addEventListener('click', (evt) => {
-
   if (evt.target.classList.contains('button_type_like')) {
     evt.target.classList.toggle('button_type_like_active');
-  }
-})
+  };
+});
 
 // Слушатель удаления карточки
 cardsList.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('button_type_delete')) {
     evt.target.closest('.card').remove();
-  }
-})
+  };
+});
