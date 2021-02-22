@@ -27,9 +27,3 @@
 .form__item::-ms-input-placeholder {
   color: rgba(0, 0, 0, .2);
 }
-
-@media screen and (max-width: 767px) {
-  .form__item {
-    width: calc(100% - 44px);
-  }
-}

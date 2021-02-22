@@ -1,8 +1,8 @@
 .popup__container {
-  width: 430px;
+  width: auto;
+  height: auto;
   margin: 0 19px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 10px;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
