@@ -156,7 +156,7 @@ function cardFormSubmitHandler(evt) {
 // Загружаем дефолтные карточки на страницу
 addCard(initialCards);
 
-// Слушатели открытия и закрытия попапа
+// Слушатели открытия попапа
 
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
@@ -168,27 +168,14 @@ addCardButton.addEventListener('click', () => {
   openPopup(cardPopup);
 });
 
+// Слушатель закрытия попапа
+
 popupList.forEach(popup => {
   popup.addEventListener('click', evt => {
-    if (evt.target.classList.contains('popup_opened') ) {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('button_type_close') ) {
         closePopup(popup)
     };
-
-    if (evt.target.classList.contains('button_type_close')) {
-      closePopup(popup)
-    };
-
-    /* Можно ли использовать такую конструкцию? Или лучше все таки разбить на 2 if
-
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('button_type_close')) {
-        closePopup(popup)
-    };
-    
-      После ревью я удалю все ненужные комментарии)
-    */
-
   });
-
 });
 
 // Слушатели обработчика формы
@@ -196,14 +183,15 @@ profileEditForm.addEventListener('submit', profileFormSubmitHandler);
 addCardForm.addEventListener('submit', cardFormSubmitHandler);
 
 // Слушатель проставки лайков карточкам
+
 cardsList.addEventListener('click', (evt) => {
+
+  // Слушатель проставки лайков карточкам
   if (evt.target.classList.contains('button_type_like')) {
     evt.target.classList.toggle('button_type_like_active');
   };
-});
 
-// Слушатель удаления карточки
-cardsList.addEventListener('click', (evt) => {
+  // Слушатель удаления карточки
   if (evt.target.classList.contains('button_type_delete')) {
     evt.target.closest('.card').remove();
   };
