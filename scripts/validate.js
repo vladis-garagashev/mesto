@@ -1,13 +1,3 @@
-// Настройки функции
-const settings = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_disabled',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_visible'
-};
-
 // Функция отображения ошибки поля
 const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -103,4 +93,11 @@ const enableValidation = (settings) => {
 //------------------------------------------------------------------------------------------------------
 
 // Вызов функции валидации форм
-enableValidation(settings);
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_visible'
+});

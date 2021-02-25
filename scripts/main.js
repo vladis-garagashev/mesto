@@ -8,7 +8,7 @@ const imagePreviePopup = document.querySelector('#popupImagePrevie');
 const previeImage = imagePreviePopup.querySelector('.figure__image');
 const previeCaption = imagePreviePopup.querySelector('.figure__caption');
 
-// Находим кнопки открыть попап  в DOM
+// Находим кнопки открыть попап в DOM
 const profileEditButton = document.querySelector('.button_type_edit');
 const addCardButton = document.querySelector('.button_type_add');
 
