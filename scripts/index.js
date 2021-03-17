@@ -1,6 +1,9 @@
 // Ипортируем классы карточки и валидации форм
-import {Card} from './Card.js'
-import {FormValidator} from './FormValidator.js'
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
+// Импортируем данные
+import {initialCards, options, escapeKey} from './utils.js';
 
 // Находим попапы в DOM
 const popupList = document.querySelectorAll('.popup');
@@ -28,44 +31,11 @@ const profileJob = document.querySelector('.profile__job');
 // Находим контейнер с карточками в DOM
 const cardList = document.querySelector('.cards__list');
 
-// Создаем список дефолтных карточек карточек
-const initialCards = [
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  }
-];
+//Инстанцирование экземпляров класса FormValidator
+const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
+const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
-// Настройки с селекторами и классами форм
-const options = {
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_disabled',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_visible'
-};
-
-//------------------------------------------------------------------------------------------------------
+//-----------------------------------
 
 // Функция добавления карточки
 function addCard(massive) {
@@ -78,15 +48,7 @@ function addCard(massive) {
   });
 };
 
-//------------------------------------------------------------------------------------------------------
-
-// Функция инициализации валидации формы
-function initValidation(formSelector) {
-  const formValidator = new FormValidator(options, formSelector);
-  formValidator.enableValidation();
-};
-
-//------------------------------------------------------------------------------------------------------
+//-----------------------------------
 
 // Функции открытия и закрытия попапов
 
@@ -102,13 +64,13 @@ function closePopup(popup) {
 
 // Функция закрытия попапа по клавише Esc
 function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === escapeKey) {
     const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup)
+    closePopup(openedPopup);
   };
 };
 
-//------------------------------------------------------------------------------------------------------
+//-----------------------------------
 
 // Функция «отправки» форм
 
@@ -135,15 +97,19 @@ function cardFormSubmitHandler(evt) {
 
   addCard(card);
   addCardForm.reset();
+  addCardFormValidator.toggleButtonState();
   closePopup(cardPopup);
 
 };
 
-//------------------------------------------------------------------------------------------------------
+//-----------------------------------
+// Активируем валидацию форм
 
-// Инициализируем валидация форм
-initValidation('.form_type_edit-profile');
-initValidation('.form_type_add-card');
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
+//-----------------------------------
+
 
 // Загружаем дефолтные карточки на страницу
 addCard(initialCards);
@@ -163,8 +129,15 @@ addCardButton.addEventListener('click', () => {
 // Слушатель закрытия попапа
 
 popupList.forEach(popup => {
+
+  popup.addEventListener('mousedown', evt => {
+    if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+    };
+  });
+
   popup.addEventListener('click', evt => {
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('button_type_close')) {
+    if (evt.target.classList.contains('button_type_close')) {
         closePopup(popup);
     };
   });
@@ -173,15 +146,3 @@ popupList.forEach(popup => {
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', profileFormSubmitHandler);
 addCardForm.addEventListener('submit', cardFormSubmitHandler);
-
-
-cardList.addEventListener('click', (evt) => {
-  // Слушатель проставки лайков карточкам
-  if (evt.target.classList.contains('button_type_like')) {
-    evt.target.classList.toggle('button_type_like_active');
-  };
-  // Слушатель удаления карточки
-  if (evt.target.classList.contains('button_type_delete')) {
-    evt.target.closest('.card').remove();
-  };
-});
