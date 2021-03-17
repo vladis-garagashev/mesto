@@ -3,12 +3,19 @@ import {imagePreviePopup, previeImage, previeCaption} from './utils.js';
 //-----------------------------------
 
 export class Card {
-  constructor(data) {
+  constructor(data, templateSelector) {
     this._name = data.name;
     this._image = data.link;
-    this._cardElement = document.querySelector('.template__card').content.querySelector('.card').cloneNode(true);
-
+    this._templateSelector = templateSelector;
   };
+
+  //-----------------------------------
+
+  // Функция получения элемента карточки
+  _getTemplate() {
+    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
+    return cardElement;
+};
 
   //-----------------------------------
 
@@ -25,7 +32,8 @@ export class Card {
   // Функция удаления карточки
   _deleteCard(evt) {
     if (evt.target.classList.contains('button_type_delete')) {
-      evt.target.closest('.card').remove();
+      this._element.remove();
+      this._element = '';
     };
   };
 
@@ -43,12 +51,12 @@ export class Card {
   // Функция добавления слушателей
   _setEventListeners() {
 
-    this._cardElement.addEventListener('click', evt => {
+    this._element.addEventListener('click', evt => {
       this._deleteCard(evt);
       this._likeCard(evt);
     });
 
-    this._cardElement.querySelector('.card__image').addEventListener('click', () => {
+    this._element.querySelector('.card__image').addEventListener('click', () => {
       this._handleOpenPopup()
     });
 
@@ -58,15 +66,16 @@ export class Card {
 
   // Функция создания карточки
   generateCard() {
+    this._element = this._getTemplate();
 
-    const cardImage = this._cardElement.querySelector('.card__image');
-    const cardHeading = this._cardElement.querySelector('.card__heading');
+    const cardImage = this._element.querySelector('.card__image');
+    const cardHeading = this._element.querySelector('.card__heading');
     cardImage.src =  this._image;
     cardImage.alt =  this._name;
     cardHeading.textContent = this._name;
     this._setEventListeners();
 
-    return this._cardElement;
+    return this._element;
   };
 
 };

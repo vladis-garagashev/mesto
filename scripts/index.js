@@ -41,7 +41,7 @@ const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 function addCard(massive) {
   massive.forEach(function (item) {
 
-    const card = new Card(item);
+    const card = new Card(item, '.template__card');
     const cardElement = card.generateCard();
     cardList.prepend(cardElement);
 
