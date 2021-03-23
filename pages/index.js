@@ -1,6 +1,5 @@
 // Ипортируем классы карточки и валидации форм
 import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/FormValidator.js';
 
 // Импортируем данные
 import {initialCards, options, escapeKey} from '../utils/constants.js';
@@ -31,9 +30,6 @@ const profileJob = document.querySelector('.profile__job');
 // Находим контейнер с карточками в DOM
 const cardList = document.querySelector('.cards__list');
 
-//Инстанцирование экземпляров класса FormValidator
-const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
-const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 //-----------------------------------
 
@@ -102,13 +98,6 @@ function cardFormSubmitHandler(evt) {
 
 };
 
-//-----------------------------------
-// Активируем валидацию форм
-
-profileFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-
-//-----------------------------------
 
 
 // Загружаем дефолтные карточки на страницу
@@ -146,3 +135,15 @@ popupList.forEach(popup => {
 // Слушатели обработчика формы
 profileEditForm.addEventListener('submit', profileFormSubmitHandler);
 addCardForm.addEventListener('submit', cardFormSubmitHandler);
+
+//-----------------------------------
+import {FormValidator} from '../components/FormValidator.js';
+//Инстанцирование экземпляров класса FormValidator
+const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
+const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
+
+// Активируем валидацию форм
+
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+//-----------------------------------
