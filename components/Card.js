@@ -1,4 +1,4 @@
-import {imagePreviePopup, previeImage, previeCaption} from './utils.js';
+import {imagePreviePopup, previeImage, previeCaption} from '../utils/constants.js';
 
 //-----------------------------------
 

@@ -1,9 +1,9 @@
 // Ипортируем классы карточки и валидации форм
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
 
 // Импортируем данные
-import {initialCards, options, escapeKey} from './utils.js';
+import {initialCards, options, escapeKey} from '../utils/constants.js';
 
 // Находим попапы в DOM
 const popupList = document.querySelectorAll('.popup');
