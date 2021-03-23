@@ -1,38 +1,6 @@
-// Ипортируем классы карточки и валидации форм
-import {Card} from '../components/Card.js';
-
-// Импортируем данные
-import {initialCards, options, escapeKey} from '../utils/constants.js';
-
-// Находим попапы в DOM
-const popupList = document.querySelectorAll('.popup');
-const profileEditPopup = document.querySelector('#popupProfile');
-const cardPopup = document.querySelector('#popupCard');
-
-// Находим кнопки открыть попап в DOM
-const profileEditButton = document.querySelector('.button_type_edit');
-const addCardButton = document.querySelector('.button_type_add');
-
-// Находим форму редактирования профиля и добавления карточек в DOM
-const profileEditForm = document.forms.editProfileForm;
-const addCardForm = document.forms.addCardForm;
-
-// Находим поля формы в DOM
-const nameInput = profileEditForm.querySelector('.form__item_element_name');
-const jobInput = profileEditForm.querySelector('.form__item_element_job');;
-const imageNameInput = addCardForm.querySelector('.form__item_element_name');;
-const imageLinkInput = addCardForm.querySelector('.form__item_element_image-link');;
-
-// Выбераем элементы, куда должны быть вставлены значения полей
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-
-// Находим контейнер с карточками в DOM
-const cardList = document.querySelector('.cards__list');
-
 
 //-----------------------------------
-
+/*
 // Функция добавления карточки
 function addCard(massive) {
   massive.forEach(function (item) {
@@ -42,12 +10,12 @@ function addCard(massive) {
     cardList.prepend(cardElement);
 
   });
-};
+}; */
 
 //-----------------------------------
 
 // Функции открытия и закрытия попапов
-
+/*
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
@@ -64,12 +32,12 @@ function closeByEscape(evt) {
     const openedPopup = document.querySelector('.popup_opened')
     closePopup(openedPopup);
   };
-};
+}; */
 
 //-----------------------------------
 
 // Функция «отправки» форм
-
+/*
 function profileFormSubmitHandler(evt) {
 
   evt.preventDefault();
@@ -96,15 +64,15 @@ function cardFormSubmitHandler(evt) {
   addCardFormValidator.toggleButtonState();
   closePopup(cardPopup);
 
-};
+}; */
 
 
 
 // Загружаем дефолтные карточки на страницу
-addCard(initialCards);
+/* addCard(initialCards); */
 
 // Слушатели открытия попапа
-
+/*
 profileEditButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -113,10 +81,10 @@ profileEditButton.addEventListener('click', () => {
 
 addCardButton.addEventListener('click', () => {
   openPopup(cardPopup);
-});
+}); */
 
 // Слушатель закрытия попапа
-
+/*
 popupList.forEach(popup => {
 
   popup.addEventListener('mousedown', evt => {
@@ -130,14 +98,22 @@ popupList.forEach(popup => {
         closePopup(popup);
     };
   });
-});
+}); */
 
 // Слушатели обработчика формы
-profileEditForm.addEventListener('submit', profileFormSubmitHandler);
-addCardForm.addEventListener('submit', cardFormSubmitHandler);
+/* profileEditForm.addEventListener('submit', profileFormSubmitHandler);
+addCardForm.addEventListener('submit', cardFormSubmitHandler); */
 
 //-----------------------------------
-import {FormValidator} from '../components/FormValidator.js';
+
+import {
+  cardListSelector,
+  initialCards,
+  options
+} from '../utils/constants.js'
+
+//-----------------------------------
+import FormValidator from '../components/FormValidator.js';
 //Инстанцирование экземпляров класса FormValidator
 const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
@@ -146,4 +122,22 @@ const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+//-----------------------------------
+
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+
+const cardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.template__card');
+    const cardElement = card.generateCard();
+    cardList.setItem(cardElement);
+  }
+},
+cardListSelector
+);
+
+cardList.renderItems();
+
 //-----------------------------------

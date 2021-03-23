@@ -1,4 +1,4 @@
-export class PopupWithForm extends Popup {
+export default class PopupWithForm extends Popup {
   constructor() {
 
   }
