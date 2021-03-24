@@ -18,7 +18,7 @@ export default class Card {
 
   // Функция открытия попапа
   _handleOpenPopup() {
-    this._handleCardClick(this._element)
+    this._handleCardClick(this._element);
   };
 
   //-----------------------------------
