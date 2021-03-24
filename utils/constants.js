@@ -1,29 +1,32 @@
 
 // Находим попапы в DOM
-export const popupList = document.querySelectorAll('.popup');
+/* export const popupList = document.querySelectorAll('.popup');
 export const profileEditPopup = document.querySelector('#popupProfile');
-export const cardPopup = document.querySelector('#popupCard');
+export const cardPopup = document.querySelector('#popupCard'); */
+
+export const cardPopupSelector = '#popupCard';
+export const profilePopupSelector = '#popupProfile';
 
 // Находим кнопки открыть попап в DOM
 export const profileEditButton = document.querySelector('.button_type_edit');
 export const addCardButton = document.querySelector('.button_type_add');
 
 // Находим форму редактирования профиля и добавления карточек в DOM
-export const profileEditForm = document.forms.editProfileForm;
-export const addCardForm = document.forms.addCardForm;
+/* export const profileEditForm = document.forms.editProfileForm;
+export const addCardForm = document.forms.addCardForm; */
 
 // Находим поля формы в DOM
-export const nameInput = profileEditForm.querySelector('.form__item_element_name');
+/* export const nameInput = profileEditForm.querySelector('.form__item_element_name');
 export const jobInput = profileEditForm.querySelector('.form__item_element_job');;
 export const imageNameInput = addCardForm.querySelector('.form__item_element_name');;
-export const imageLinkInput = addCardForm.querySelector('.form__item_element_image-link');;
+export const imageLinkInput = addCardForm.querySelector('.form__item_element_image-link');; */
 
 // Выбераем элементы, куда должны быть вставлены значения полей
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
 
 // Находим контейнер с карточками в DOM
-export const cardList = document.querySelector('.cards__list');
+/* export const cardList = document.querySelector('.cards__list'); */
 export const cardListSelector = '.cards__list';
 
 // Находим попап карточки и его элементы

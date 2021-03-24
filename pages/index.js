@@ -109,7 +109,13 @@ addCardForm.addEventListener('submit', cardFormSubmitHandler); */
 import {
   cardListSelector,
   initialCards,
-  options
+  options,
+  cardPopupSelector,
+  addCardButton,
+  profilePopupSelector,
+  profileEditButton,
+  profileName,
+  profileJob
 } from '../utils/constants.js'
 
 //-----------------------------------
@@ -127,17 +133,65 @@ addCardFormValidator.enableValidation();
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 
-const cardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '.template__card');
-    const cardElement = card.generateCard();
-    cardList.setItem(cardElement);
-  }
-},
-cardListSelector
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, '.template__card');
+      const cardElement = card.generateCard();
+      cardList.setItem(cardElement);
+    }
+  },
+  cardListSelector
 );
 
 cardList.renderItems();
 
+
 //-----------------------------------
+
+import PopupWithForm from '../components/PopupWithForm.js'
+
+const profilePopup = new PopupWithForm(
+  profilePopupSelector,
+  {
+    handleFormSubmit: (formData) => {
+
+    }
+  }
+);
+
+profilePopup.setEventListeners()
+
+profileEditButton.addEventListener('click', () => {
+  profilePopup.open()
+});
+
+
+const addCardPopup = new PopupWithForm(
+  cardPopupSelector,
+  {
+    handleFormSubmit: (formData) => {
+      const cardList = new Section(
+        {
+          data: [formData],
+          renderer: (item) => {
+            const card = new Card(item, '.template__card');
+            const cardElement = card.generateCard();
+            cardList.setItem(cardElement);
+          }
+        },
+        cardListSelector
+      );
+      cardList.renderItems();
+    }
+  }
+);
+
+addCardPopup.setEventListeners()
+
+addCardButton.addEventListener('click', () => {
+  addCardPopup.open()
+});
+
+
