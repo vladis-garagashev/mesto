@@ -1,19 +1,4 @@
 
-//-----------------------------------
-/*
-// Функция добавления карточки
-function addCard(massive) {
-  massive.forEach(function (item) {
-
-    const card = new Card(item, '.template__card');
-    const cardElement = card.generateCard();
-    cardList.prepend(cardElement);
-
-  });
-}; */
-
-//-----------------------------------
-
 // Функции открытия и закрытия попапов
 /*
 export function openPopup(popup) {
@@ -36,40 +21,6 @@ function closeByEscape(evt) {
 
 //-----------------------------------
 
-// Функция «отправки» форм
-/*
-function profileFormSubmitHandler(evt) {
-
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopup(profileEditPopup);
-
-};
-
-function cardFormSubmitHandler(evt) {
-
-  evt.preventDefault();
-
-  const card = [
-    {
-      name: `${imageNameInput.value}`,
-      link: `${imageLinkInput.value}`
-    }
-  ];
-
-  addCard(card);
-  addCardForm.reset();
-  addCardFormValidator.toggleButtonState();
-  closePopup(cardPopup);
-
-}; */
-
-
-
-// Загружаем дефолтные карточки на страницу
-/* addCard(initialCards); */
 
 // Слушатели открытия попапа
 /*
@@ -100,10 +51,6 @@ popupList.forEach(popup => {
   });
 }); */
 
-// Слушатели обработчика формы
-/* profileEditForm.addEventListener('submit', profileFormSubmitHandler);
-addCardForm.addEventListener('submit', cardFormSubmitHandler); */
-
 //-----------------------------------
 
 import {
@@ -114,25 +61,26 @@ import {
   addCardButton,
   profilePopupSelector,
   profileEditButton,
-  profileName,
-  profileJob
+  profileNametSelector,
+  profileJobtSelector,
+  nameInput,
+  jobInput
 } from '../utils/constants.js'
 
-//-----------------------------------
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 import FormValidator from '../components/FormValidator.js';
+
+//-----------------------------------
 //Инстанцирование экземпляров класса FormValidator
 const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
-// Активируем валидацию форм
-
-profileFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
 //-----------------------------------
-
-import Section from '../components/Section.js';
-import Card from '../components/Card.js';
-
+//Инстанцирование экземпляра класса Section со стандартными карточками
 const cardList = new Section(
   {
     data: initialCards,
@@ -145,28 +93,21 @@ const cardList = new Section(
   cardListSelector
 );
 
-cardList.renderItems();
-
+//-----------------------------------
+//Инстанцирование экземпляра класса UserInfo
+const userInfo = new UserInfo({profileNametSelector, profileJobtSelector});
 
 //-----------------------------------
-
-import PopupWithForm from '../components/PopupWithForm.js'
-
+//Инстанцирование экземпляров класса PopupWithForm
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   {
     handleFormSubmit: (formData) => {
+      userInfo.setUserInfo(formData)
 
     }
   }
 );
-
-profilePopup.setEventListeners()
-
-profileEditButton.addEventListener('click', () => {
-  profilePopup.open()
-});
-
 
 const addCardPopup = new PopupWithForm(
   cardPopupSelector,
@@ -188,10 +129,27 @@ const addCardPopup = new PopupWithForm(
   }
 );
 
-addCardPopup.setEventListeners()
+//-----------------------------------
 
-addCardButton.addEventListener('click', () => {
-  addCardPopup.open()
+// Отрисовка карточек
+cardList.renderItems();
+
+// Активация валидации форм
+profileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
+// Установка слушателей для попапов
+profilePopup.setEventListeners();
+addCardPopup.setEventListeners();
+
+profileEditButton.addEventListener('click', () => {
+  const userInfoValues = userInfo.getUserInfo();
+  nameInput.value = userInfoValues.name;
+  jobInput.value = userInfoValues.job;
+  profileFormValidator.toggleButtonState()
+  profilePopup.open();
 });
 
-
+addCardButton.addEventListener('click', () => {
+  addCardPopup.open();
+});
