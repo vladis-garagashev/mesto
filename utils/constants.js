@@ -1,14 +1,9 @@
-
-// Находим попапы в DOM
-/* export const popupList = document.querySelectorAll('.popup');
-export const profileEditPopup = document.querySelector('#popupProfile');
-export const cardPopup = document.querySelector('#popupCard'); */
-
+// Находим селекторы попапов
 export const cardPopupSelector = '#popupCard';
 export const profilePopupSelector = '#popupProfile';
 export const imagePreviePopupSelector = '#popupImagePrevie';
 
-// Находим кнопки открыть попап в DOM
+// Находим кнопки открыть попап
 export const profileEditButton = document.querySelector('.button_type_edit');
 export const addCardButton = document.querySelector('.button_type_add');
 
@@ -21,13 +16,8 @@ export const jobInput = profileEditForm.querySelector('.form__item_element_job')
 export const profileNametSelector = '.profile__name';
 export const profileJobtSelector = '.profile__job';
 
-// Находим контейнер с карточками в DOM
+// Находим селектор контейнера с карточками
 export const cardListSelector = '.cards__list';
-
-// Находим попап карточки и его элементы
-export const imagePreviePopup = document.querySelector('#popupImagePrevie');
-export const previeImage = imagePreviePopup.querySelector('.figure__image');
-export const previeCaption = imagePreviePopup.querySelector('.figure__caption');
 
 // Создаем список дефолтных карточек карточек
 export const initialCards = [

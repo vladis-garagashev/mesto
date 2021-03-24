@@ -1,11 +1,8 @@
-import {imagePreviePopup, previeImage, previeCaption} from '../utils/constants.js';
-
-//-----------------------------------
-
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor({data, handleCardClick}, templateSelector) {
     this._name = data.name;
     this._image = data.link;
+    this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   };
 
@@ -21,10 +18,7 @@ export default class Card {
 
   // Функция открытия попапа
   _handleOpenPopup() {
-    previeImage.src = this._image;
-    previeImage.alt = this._name;
-    previeCaption.textContent = this._name;
-    imagePreviePopup.classList.add('popup_opened');
+    this._handleCardClick(this._element)
   };
 
   //-----------------------------------
@@ -68,11 +62,11 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
 
-    const cardImage = this._element.querySelector('.card__image');
-    const cardHeading = this._element.querySelector('.card__heading');
-    cardImage.src =  this._image;
-    cardImage.alt =  this._name;
-    cardHeading.textContent = this._name;
+    this._cardImage = this._element.querySelector('.card__image');
+    this._cardHeading = this._element.querySelector('.card__heading');
+    this._cardImage.src =  this._image;
+    this._cardImage.alt =  this._name;
+    this._cardHeading.textContent = this._name;
     this._setEventListeners();
 
     return this._element;

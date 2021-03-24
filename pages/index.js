@@ -1,65 +1,11 @@
-
-// Функции открытия и закрытия попапов
-/*
-export function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape);
-};
-
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-};
-
-// Функция закрытия попапа по клавише Esc
-function closeByEscape(evt) {
-  if (evt.key === escapeKey) {
-    const openedPopup = document.querySelector('.popup_opened')
-    closePopup(openedPopup);
-  };
-}; */
-
-//-----------------------------------
-
-
-// Слушатели открытия попапа
-/*
-profileEditButton.addEventListener('click', () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  openPopup(profileEditPopup);
-});
-
-addCardButton.addEventListener('click', () => {
-  openPopup(cardPopup);
-}); */
-
-// Слушатель закрытия попапа
-/*
-popupList.forEach(popup => {
-
-  popup.addEventListener('mousedown', evt => {
-    if (evt.target.classList.contains('popup_opened')) {
-        closePopup(popup);
-    };
-  });
-
-  popup.addEventListener('click', evt => {
-    if (evt.target.classList.contains('button_type_close')) {
-        closePopup(popup);
-    };
-  });
-}); */
-
-//-----------------------------------
-
 import {
   cardListSelector,
   initialCards,
   options,
   cardPopupSelector,
-  addCardButton,
   profilePopupSelector,
+  imagePreviePopupSelector,
+  addCardButton,
   profileEditButton,
   profileNametSelector,
   profileJobtSelector,
@@ -75,36 +21,19 @@ import UserInfo from '../components/UserInfo.js'
 import FormValidator from '../components/FormValidator.js';
 
 //-----------------------------------
+
 //Инстанцирование экземпляров класса FormValidator
 const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 //-----------------------------------
-//Инстанцирование экземпляра класса Section со стандартными карточками
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, '.template__card');
-      const cardElement = card.generateCard();
-      cardList.setItem(cardElement);
-    }
-  },
-  cardListSelector
-);
 
-//-----------------------------------
-//Инстанцирование экземпляра класса UserInfo
-const userInfo = new UserInfo({profileNametSelector, profileJobtSelector});
-
-//-----------------------------------
 //Инстанцирование экземпляров класса PopupWithForm
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   {
     handleFormSubmit: (formData) => {
       userInfo.setUserInfo(formData)
-
     }
   }
 );
@@ -113,25 +42,67 @@ const addCardPopup = new PopupWithForm(
   cardPopupSelector,
   {
     handleFormSubmit: (formData) => {
+      //Инстанцирование экземпляра класса Section
       const cardList = new Section(
         {
           data: [formData],
           renderer: (item) => {
-            const card = new Card(item, '.template__card');
+            //Инстанцирование экземпляра класса Card
+            const card = new Card(
+              {
+                data: item,
+                handleCardClick: () => {
+                  imagePreviePopup.open(item)
+                }
+              },
+               '.template__card'
+            );
             const cardElement = card.generateCard();
             cardList.setItem(cardElement);
           }
         },
         cardListSelector
       );
+      // отрисовка карточки
       cardList.renderItems();
     }
   }
 );
 
+const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector)
+
 //-----------------------------------
 
-// Отрисовка карточек
+//Инстанцирование экземпляра класса Section со стандартными карточками
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      //Инстанцирование экземпляра класса Card
+      const card = new Card(
+        {
+          data: item,
+          handleCardClick: () => {
+            imagePreviePopup.open(item)
+          }
+        },
+         '.template__card'
+      );
+      const cardElement = card.generateCard();
+      cardList.setItem(cardElement);
+    }
+  },
+  cardListSelector
+);
+
+//-----------------------------------
+
+//Инстанцирование экземпляра класса UserInfo
+const userInfo = new UserInfo({profileNametSelector, profileJobtSelector});
+
+//-----------------------------------
+
+// Отрисовка стандартных карточек
 cardList.renderItems();
 
 // Активация валидации форм
@@ -141,6 +112,7 @@ addCardFormValidator.enableValidation();
 // Установка слушателей для попапов
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
+imagePreviePopup.setEventListeners();
 
 profileEditButton.addEventListener('click', () => {
   const userInfoValues = userInfo.getUserInfo();
