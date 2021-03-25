@@ -55,6 +55,3 @@ export const options = {
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__item-error_visible'
 };
-
-export const escapeKey = 'Escape';
-

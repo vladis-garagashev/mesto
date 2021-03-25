@@ -69,6 +69,7 @@ const addCardPopup = new PopupWithForm(
   }
 );
 
+//Инстанцирование экземпляров класса PopupWithImage
 const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector)
 
 //-----------------------------------
