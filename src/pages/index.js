@@ -12,7 +12,7 @@ import {
   profileJobtSelector,
   nameInput,
   jobInput
-} from '../utils/constants.js'
+} from '../utils/constants.js';
 
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -29,12 +29,41 @@ const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 //-----------------------------------
 
+// Функция создание элемента с карточкой
+const createCard = (item) => {
+  //Инстанцирование экземпляра класса Card
+  const card = new Card(
+    {
+      data: item,
+      handleCardClick: () => {
+        imagePreviePopup.open(item);
+      }
+    },
+     '.template__card'
+  );
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+//Инстанцирование экземпляра класса Section со стандартными карточками
+const cardList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      cardList.setItem(createCard(item));
+    }
+  },
+  cardListSelector
+);
+
+//-----------------------------------
+
 //Инстанцирование экземпляров класса PopupWithForm
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   {
     handleFormSubmit: (formData) => {
-      userInfo.setUserInfo(formData)
+      userInfo.setUserInfo(formData);
     }
   }
 );
@@ -43,59 +72,13 @@ const addCardPopup = new PopupWithForm(
   cardPopupSelector,
   {
     handleFormSubmit: (formData) => {
-      //Инстанцирование экземпляра класса Section
-      const cardList = new Section(
-        {
-          data: [formData],
-          renderer: (item) => {
-            //Инстанцирование экземпляра класса Card
-            const card = new Card(
-              {
-                data: item,
-                handleCardClick: () => {
-                  imagePreviePopup.open(item)
-                }
-              },
-               '.template__card'
-            );
-            const cardElement = card.generateCard();
-            cardList.setItem(cardElement);
-          }
-        },
-        cardListSelector
-      );
-      // отрисовка карточки
-      cardList.renderItems();
+      cardList.setItem(createCard(formData));
     }
   }
 );
 
 //Инстанцирование экземпляров класса PopupWithImage
-const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector)
-
-//-----------------------------------
-
-//Инстанцирование экземпляра класса Section со стандартными карточками
-const cardList = new Section(
-  {
-    data: initialCards,
-    renderer: (item) => {
-      //Инстанцирование экземпляра класса Card
-      const card = new Card(
-        {
-          data: item,
-          handleCardClick: () => {
-            imagePreviePopup.open(item)
-          }
-        },
-         '.template__card'
-      );
-      const cardElement = card.generateCard();
-      cardList.setItem(cardElement);
-    }
-  },
-  cardListSelector
-);
+const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector);
 
 //-----------------------------------
 
@@ -120,10 +103,13 @@ profileEditButton.addEventListener('click', () => {
   const userInfoValues = userInfo.getUserInfo();
   nameInput.value = userInfoValues.name;
   jobInput.value = userInfoValues.job;
-  profileFormValidator.toggleButtonState()
+  profileFormValidator.toggleButtonState();
   profilePopup.open();
 });
 
 addCardButton.addEventListener('click', () => {
+  addCardFormValidator.toggleButtonState();
   addCardPopup.open();
 });
+
+
