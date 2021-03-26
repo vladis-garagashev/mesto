@@ -74,6 +74,13 @@ export default class FormValidator {
       evt.preventDefault();
     });
 
+    this._formElement.addEventListener('reset', () => {
+      this._inputList.forEach(inputElement => {
+          this._hideInputError(inputElement);
+          this.toggleButtonState();
+      })
+  });
+
     this.toggleButtonState();
 
     // Добавляем слушатель для каждого поля формы
