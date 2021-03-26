@@ -50,7 +50,7 @@ export default class Card {
       this._likeCard(evt);
     });
 
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleOpenPopup()
     });
 
