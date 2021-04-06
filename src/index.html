@@ -93,6 +93,25 @@
 
   </artticle>
 
+  <artticle class="popup" id="popupAvatar">
+
+    <div class="popup__container">
+
+      <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
+        <h3 class="form__heading">Обновить аватар</h3>
+
+        <section class="form__section">
+          <input class="form__item form__item_element_image-link" type="url" name="link" id="link" placeholder="Ссылка на картинку" required>
+          <span class="form__item-error" id="link-error"></span>
+        </section>
+
+        <button class="form__submit-button" type="submit">Сохранить</button>
+        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+      </form>
+    </div>
+
+  </artticle>
+
   <artticle class="popup" id="popupImagePrevie">
 
     <div class="popup__container">
