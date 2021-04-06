@@ -20,7 +20,11 @@
     <main class="content">
 
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар профиля">
+        <div class="profile__avatar">
+          <img class="profile__avatar-image" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар профиля">
+          <button type="button" class="button button_type_edit-avatar" aria-label="Изменить аватар"></button>
+
+        </div>
 
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -97,7 +101,7 @@
 
     <div class="popup__container">
 
-      <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
+      <form class="form form_type_edit-avatar" method="POST" name="addCardForm" novalidate>
         <h3 class="form__heading">Обновить аватар</h3>
 
         <section class="form__section">
@@ -116,7 +120,7 @@
 
     <div class="popup__container">
 
-      <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
+      <form class="form form_type_delete-card" method="POST" name="addCardForm" novalidate>
         <h3 class="form__heading">Вы уверены?</h3>
 
         <button class="form__submit-button" type="submit">Да</button>
