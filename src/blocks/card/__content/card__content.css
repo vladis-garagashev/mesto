@@ -1,6 +1,5 @@
 .card__content {
-  margin: 25px 20px 30px;
+  margin: 22px 20px;
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;
 }
