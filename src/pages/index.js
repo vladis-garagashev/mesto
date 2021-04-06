@@ -3,9 +3,11 @@ import {
   cardListSelector,
   initialCards,
   options,
+  avatarPopupSelector,
   cardPopupSelector,
   profilePopupSelector,
   imagePreviePopupSelector,
+  avatarEditButton,
   addCardButton,
   profileEditButton,
   profileNametSelector,
@@ -24,6 +26,7 @@ import FormValidator from '../components/FormValidator.js';
 //-----------------------------------
 
 //Инстанцирование экземпляров класса FormValidator
+const avatarFormValidator = new FormValidator(options, '.form_type_edit-avatar');
 const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
@@ -59,6 +62,14 @@ const cardList = new Section(
 //-----------------------------------
 
 //Инстанцирование экземпляров класса PopupWithForm
+const avatarPopup = new PopupWithForm(
+  avatarPopupSelector,
+  {
+    handleFormSubmit: (formData) => {
+    }
+  }
+);
+
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
   {
@@ -91,13 +102,20 @@ const userInfo = new UserInfo({profileNametSelector, profileJobtSelector});
 cardList.renderItems();
 
 // Активация валидации форм
+avatarFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 // Установка слушателей для попапов
+avatarPopup.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 imagePreviePopup.setEventListeners();
+
+avatarEditButton.addEventListener('click', () => {
+  avatarFormValidator.toggleButtonState();
+  avatarPopup.open();
+})
 
 profileEditButton.addEventListener('click', () => {
   const userInfoValues = userInfo.getUserInfo();
