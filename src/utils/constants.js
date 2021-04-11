@@ -12,11 +12,12 @@ export const addCardButton = document.querySelector('.button_type_add');
 // Находим форму редактирования профиля и её инпуты
 export const profileEditForm = document.forms.editProfileForm;
 export const nameInput = profileEditForm.querySelector('.form__item_element_name');
-export const jobInput = profileEditForm.querySelector('.form__item_element_job');;
+export const aboutInput = profileEditForm.querySelector('.form__item_element_job');
 
 // Выбераем элементы, куда должны быть вставлены значения полей
 export const profileNametSelector = '.profile__name';
-export const profileJobtSelector = '.profile__job';
+export const profileAboutSelector = '.profile__job';
+export const profileAvatarSelector = '.profile__avatar-image'
 
 // Находим селектор контейнера с карточками
 export const cardListSelector = '.cards__list';

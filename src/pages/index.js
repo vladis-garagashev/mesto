@@ -11,9 +11,10 @@ import {
   addCardButton,
   profileEditButton,
   profileNametSelector,
-  profileJobtSelector,
+  profileAboutSelector,
+  profileAvatarSelector,
   nameInput,
-  jobInput
+  aboutInput
 } from '../utils/constants.js';
 
 import Api from '../components/Api.js';
@@ -38,6 +39,13 @@ const api = new Api({
   token: '12e16369-63c3-45db-b812-aa3f60268f30',
   cohortId: 'cohort-22'
 });
+
+api.getUserInfo()
+    .then(data => {
+      userInfo.setUserAvatar(data);
+      userInfo.setUserInfo(data);
+    })
+    .catch(error => console.log(error));
 
 // Функция создание элемента с карточкой
 const createCard = (item) => {
@@ -101,7 +109,7 @@ const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector);
 //-----------------------------------
 
 //Инстанцирование экземпляра класса UserInfo
-const userInfo = new UserInfo({profileNametSelector, profileJobtSelector});
+const userInfo = new UserInfo({profileNametSelector, profileAboutSelector, profileAvatarSelector});
 
 //-----------------------------------
 
@@ -127,7 +135,7 @@ avatarEditButton.addEventListener('click', () => {
 profileEditButton.addEventListener('click', () => {
   const userInfoValues = userInfo.getUserInfo();
   nameInput.value = userInfoValues.name;
-  jobInput.value = userInfoValues.job;
+  aboutInput.value = userInfoValues.about;
   profileFormValidator.toggleButtonState();
   profilePopup.open();
 });

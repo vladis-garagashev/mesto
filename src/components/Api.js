@@ -5,4 +5,18 @@ export default class Api {
     this._cohortId = cohortId;
   };
 
+  getUserInfo() {
+    return fetch(`${this._adress}/v1/${this._cohortId}/users/me`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`Ошибка ${responce.status}`)
+    })
+  }
+
 }
