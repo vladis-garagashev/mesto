@@ -11,11 +11,11 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json()
+    .then(response => {
+      if (response.ok) {
+        return response.json()
       }
-      return Promise.reject(`Ошибка ${responce.status}`)
+      return Promise.reject(`Ошибка ${response.status}`)
     });
   };
 
@@ -30,11 +30,11 @@ export default class Api {
         avatar: data.avatar
       })
     })
-    .then(responce => {
-      if (responce.ok) {
-        return responce.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json();
       }
-      return Promise.reject(`Ошибка ${responce.status}`)
+      return Promise.reject(`Ошибка ${response.status}`)
     });
   };
 
@@ -50,11 +50,11 @@ export default class Api {
         about: data.about
       })
     })
-    .then(responce => {
-      if (responce.ok) {
-        return responce.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json();
       }
-      return Promise.reject(`Ошибка ${responce.status}`)
+      return Promise.reject(`Ошибка ${response.status}`)
     });
   };
 
@@ -64,11 +64,11 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(responce => {
-      if (responce.ok) {
-        return responce.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json();
       }
-      return Promise.reject(`Ошибка ${responce.status}`);
+      return Promise.reject(`Ошибка ${response.status}`);
     });
   };
 
@@ -84,12 +84,36 @@ export default class Api {
         link: data.link
       })
     })
-    .then(responce => {
-      if (responce.ok) {
-        return responce.json();
+    .then(response => {
+      if (response.ok) {
+        return response.json();
       }
-      return Promise.reject(`Ошибка ${responce.status}`);
+      return Promise.reject(`Ошибка ${response.status}`);
     });
   };
+
+  likeCard(id) {
+    return fetch(`${this._adress}/v1/${this._cohortId}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(response => response.ok
+      ? response.json()
+      : Promise.reject(`Ошибка ${response.status}`));
+  }
+
+  removeLikeCard(id) {
+    return fetch(`${this._adress}/v1/${this._cohortId}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(response => response.ok
+      ? response.json()
+      : Promise.reject(`Ошибка ${response.status}`));
+  }
 
 };

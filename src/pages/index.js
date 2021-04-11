@@ -54,6 +54,17 @@ const createCard = (item) => {
       data: item,
       handleCardClick: () => {
         imagePreviePopup.open(item);
+      },
+      handleLikeClick: (isLiked) => {
+        if(!isLiked) {
+          api.removeLikeCard(card.getId())
+            .then(data => card.setLike(data))
+            .catch(error => console.log(error));
+        } else {
+          api.likeCard(card.getId())
+            .then(data => card.setLike(data))
+            .catch(error => console.log(error));
+        };
       }
     },
      '.template__card'
@@ -159,5 +170,6 @@ addCardButton.addEventListener('click', () => {
   addCardFormValidator.toggleButtonState();
   addCardPopup.open();
 });
+
 
 
