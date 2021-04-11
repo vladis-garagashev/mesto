@@ -16,6 +16,7 @@ import {
   jobInput
 } from '../utils/constants.js';
 
+import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js'
@@ -31,6 +32,12 @@ const profileFormValidator = new FormValidator(options, '.form_type_edit-profile
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 //-----------------------------------
+//Инстанцирование экземпляра класса Api
+const api = new Api({
+  adress: 'https://mesto.nomoreparties.co',
+  token: '12e16369-63c3-45db-b812-aa3f60268f30',
+  cohortId: 'cohort-22'
+});
 
 // Функция создание элемента с карточкой
 const createCard = (item) => {
