@@ -19,6 +19,26 @@ export default class Api {
     })
   };
 
+  editUserInfo(data) {
+    return fetch(`${this._adress}/v1/${this._cohortId}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+    .then(responce => {
+      if (responce.ok) {
+        return responce.json();
+      }
+      return Promise.reject(`Ошибка ${responce.status}`)
+    })
+  };
+
   getInitialCards() {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards`, {
       headers: {
