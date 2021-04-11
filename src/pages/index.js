@@ -1,7 +1,6 @@
 import './index.css';
 import {
   cardListSelector,
-  initialCards,
   options,
   avatarPopupSelector,
   cardPopupSelector,
@@ -63,10 +62,9 @@ const createCard = (item) => {
   return cardElement;
 };
 
-//Инстанцирование экземпляра класса Section со стандартными карточками
+//Инстанцирование экземпляра класса Section
 const cardList = new Section(
   {
-    data: initialCards,
     renderer: (item) => {
       cardList.setItem(createCard(item));
     }
@@ -114,7 +112,11 @@ const userInfo = new UserInfo({profileNametSelector, profileAboutSelector, profi
 //-----------------------------------
 
 // Отрисовка стандартных карточек
-cardList.renderItems();
+api.getInitialCards()
+.then(cards => {
+  cardList.renderItems(cards);
+})
+.catch(error => console.log(error))
 
 // Активация валидации форм
 avatarFormValidator.enableValidation();
