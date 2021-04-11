@@ -79,6 +79,11 @@ const avatarPopup = new PopupWithForm(
   avatarPopupSelector,
   {
     handleFormSubmit: (formData) => {
+      api.editUserAvatar(formData)
+        .then(data => {
+          userInfo.setUserAvatar(data);
+        })
+        .catch(error => {console.log(error)});
     }
   }
 );
@@ -91,7 +96,7 @@ const profilePopup = new PopupWithForm(
         .then(data => {
           userInfo.setUserInfo(data);
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
     }
   }
 );
@@ -104,7 +109,7 @@ const addCardPopup = new PopupWithForm(
         .then(card => {
           cardList.setItem(createCard(card));
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
     }
   }
 );
@@ -124,7 +129,7 @@ api.getInitialCards()
 .then(cards => {
   cardList.renderItems(cards);
 })
-.catch(error => console.log(error))
+.catch(error => console.log(error));
 
 // Активация валидации форм
 avatarFormValidator.enableValidation();

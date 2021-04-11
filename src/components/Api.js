@@ -19,6 +19,25 @@ export default class Api {
     });
   };
 
+  editUserAvatar(data) {
+    return fetch(`${this._adress}/v1/${this._cohortId}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    })
+    .then(responce => {
+      if (responce.ok) {
+        return responce.json();
+      }
+      return Promise.reject(`Ошибка ${responce.status}`)
+    });
+  };
+
   editUserInfo(data) {
     return fetch(`${this._adress}/v1/${this._cohortId}/users/me`, {
       method: 'PATCH',
