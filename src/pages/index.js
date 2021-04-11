@@ -100,7 +100,11 @@ const addCardPopup = new PopupWithForm(
   cardPopupSelector,
   {
     handleFormSubmit: (formData) => {
-      cardList.setItem(createCard(formData));
+      api.addCard(formData)
+        .then(card => {
+          cardList.setItem(createCard(card));
+        })
+        .catch(error => console.log(error))
     }
   }
 );

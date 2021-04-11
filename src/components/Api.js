@@ -16,7 +16,7 @@ export default class Api {
         return res.json()
       }
       return Promise.reject(`Ошибка ${responce.status}`)
-    })
+    });
   };
 
   editUserInfo(data) {
@@ -36,7 +36,7 @@ export default class Api {
         return responce.json();
       }
       return Promise.reject(`Ошибка ${responce.status}`)
-    })
+    });
   };
 
   getInitialCards() {
@@ -53,4 +53,24 @@ export default class Api {
     });
   };
 
-}
+  addCard(data) {
+    return fetch(`${this._adress}/v1/${this._cohortId}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+    .then(responce => {
+      if (responce.ok) {
+        return responce.json();
+      }
+      return Promise.reject(`Ошибка ${responce.status}`);
+    });
+  };
+
+};
