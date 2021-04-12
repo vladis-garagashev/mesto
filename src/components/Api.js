@@ -5,17 +5,25 @@ export default class Api {
     this._cohortId = cohortId;
   };
 
+  // Функция обработки ответа промиса
+  _handleResponse(res)  {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${response.status}`);
+  }
+
+  // Функция получения информации о пользователе
   getUserInfo() {
     return fetch(`${this._adress}/v1/${this._cohortId}/users/me`, {
       headers: {
         authorization: this._token
       }
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция редактирования аватара пользователя
   editUserAvatar(data) {
     return fetch(`${this._adress}/v1/${this._cohortId}/users/me/avatar`, {
       method: 'PATCH',
@@ -27,11 +35,10 @@ export default class Api {
         avatar: data.avatar
       })
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция редактирования информации о пользователе
   editUserInfo(data) {
     return fetch(`${this._adress}/v1/${this._cohortId}/users/me`, {
       method: 'PATCH',
@@ -44,22 +51,20 @@ export default class Api {
         about: data.about
       })
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция получения стандартных карточек
   getInitialCards() {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards`, {
       headers: {
         authorization: this._token
       }
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция добавления новой карточки
   addCard(data) {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards`, {
       method: 'POST',
@@ -72,11 +77,10 @@ export default class Api {
         link: data.link
       })
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция проставки лайка для карточки
   likeCard(id) {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards/likes/${id}`, {
       method: 'PUT',
@@ -84,11 +88,10 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция удаления лайка у карточки
   removeLikeCard(id) {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards/likes/${id}`, {
       method: 'DELETE',
@@ -96,11 +99,10 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
+  // Функция удаления карточки
   deleteCard(id) {
     return fetch(`${this._adress}/v1/${this._cohortId}/cards/${id}`, {
       method: 'DELETE',
@@ -108,9 +110,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(response => response.ok
-      ? response.json()
-      : Promise.reject(`Ошибка ${response.status}`));
+    .then(res => this._handleResponse(res));
   };
 
 };
