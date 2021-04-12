@@ -46,8 +46,8 @@ const renderLoading = (isLoading, formElement) => {
     defaultTitle.style.display = 'block';
     loadingTitle.style.display = 'none';
 
-  }
-}
+  };
+};
 
 //Инстанцирование экземпляра класса Api
 const api = new Api({
@@ -59,8 +59,7 @@ const api = new Api({
 // Функция создание элемента с карточкой
 const createCard = (item) => {
   //Инстанцирование экземпляра класса Card
-  const card = new Card(
-    {
+  const card = new Card({
       data: item,
       handleCardClick: () => {
         imagePreviePopup.open(item);
@@ -72,7 +71,7 @@ const createCard = (item) => {
             handleFormSubmit: () => {
               api.deleteCard(card.getId())
               .then(() => {card.deleteCard()})
-              .catch(err => console.log(err))
+              .catch(err => console.log(err));
             }
           }
         );
@@ -80,7 +79,7 @@ const createCard = (item) => {
         deleteCardPopup.open();
       },
       handleLikeClick: (isLiked) => {
-        if(!isLiked) {
+        if(isLiked) {
           api.removeLikeCard(card.getId())
             .then(data => card.likeCard(data))
             .catch(error => console.log(error));
@@ -98,8 +97,7 @@ const createCard = (item) => {
 };
 
 //Инстанцирование экземпляра класса Section
-const cardList = new Section(
-  {
+const cardList = new Section({
     renderer: (item) => {
       cardList.setItem(createCard(item));
     }
@@ -111,51 +109,48 @@ const cardList = new Section(
 
 //Инстанцирование экземпляров класса PopupWithForm
 const avatarPopup = new PopupWithForm(
-  avatarPopupSelector,
-  {
+  avatarPopupSelector, {
     handleFormSubmit: (formData) => {
-      renderLoading(true, avatarPopup.getFormn())
+      renderLoading(true, avatarPopup.getFormn());
       api.editUserAvatar(formData)
         .then(data => {
-          userInfo.setUserAvatar(data);
+          userInfo.setUserInfo(data);
         })
         .catch(error => {console.log(error)})
         .finally(() => {
-          renderLoading(false, avatarPopup.getFormn())
+          renderLoading(false, avatarPopup.getFormn());
         });
     }
   }
 );
 
 const profilePopup = new PopupWithForm(
-  profilePopupSelector,
-  {
+  profilePopupSelector, {
     handleFormSubmit: (formData) => {
-      renderLoading(true, profilePopup.getFormn())
+      renderLoading(true, profilePopup.getFormn());
       api.editUserInfo(formData)
         .then(data => {
           userInfo.setUserInfo(data);
         })
         .catch(error => console.log(error))
         .finally(() => {
-          renderLoading(false, profilePopup.getFormn())
+          renderLoading(false, profilePopup.getFormn());
         });
     }
   }
 );
 
 const addCardPopup = new PopupWithForm(
-  cardPopupSelector,
-  {
+  cardPopupSelector, {
     handleFormSubmit: (formData) => {
-      renderLoading(true, addCardPopup.getFormn())
+      renderLoading(true, addCardPopup.getFormn());
       api.addCard(formData)
         .then(card => {
           cardList.setItem(createCard(card));
         })
         .catch(error => console.log(error))
         .finally(() => {
-          renderLoading(false, addCardPopup.getFormn())
+          renderLoading(false, addCardPopup.getFormn());
         });
     }
   }
@@ -167,24 +162,27 @@ const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector);
 //-----------------------------------
 
 //Инстанцирование экземпляра класса UserInfo
-const userInfo = new UserInfo({profileNametSelector, profileAboutSelector, profileAvatarSelector});
+const userInfo = new UserInfo({
+  profileNametSelector,
+  profileAboutSelector,
+  profileAvatarSelector
+});
 
 //-----------------------------------
 
 // Получаем информацию о пользователе
 api.getUserInfo()
-    .then(data => {
-      userInfo.setUserAvatar(data);
-      userInfo.setUserInfo(data);
-    })
-    .catch(error => console.log(error));
+  .then(data => {
+    userInfo.setUserInfo(data);
+  })
+  .catch(error => console.log(error));
 
 // Отрисовка стандартных карточек
 api.getInitialCards()
-.then(cards => {
-  cardList.renderItems(cards);
-})
-.catch(error => console.log(error));
+  .then(cards => {
+    cardList.renderItems(cards);
+  })
+  .catch(error => console.log(error));
 
 // Активация валидации форм
 avatarFormValidator.enableValidation();

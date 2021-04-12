@@ -24,7 +24,7 @@ export default class Card {
 
   // Функция получения id карточки
   getId() {
-    return this._id
+    return this._id;
   }
   //-----------------------------------
 
@@ -47,6 +47,7 @@ export default class Card {
   likeCard(data) {
     this._cardLikeButton.classList.toggle('button_type_like_active');
     this._cardLikeCounter.textContent = data.likes.length;
+    this._isLiked = !this._isLiked;
   };
 
   //-----------------------------------
@@ -55,12 +56,11 @@ export default class Card {
   _setEventListeners() {
 
     this._deleteCardButton.addEventListener('click', () => {
-      this._handleDeleteButtonClick()
+      this._handleDeleteButtonClick();
     });
 
     this._cardLikeButton.addEventListener('click', () => {
-      this._isLiked = !this._isLiked;
-      this._handleLikeClick(this._isLiked)
+      this._handleLikeClick(this._isLiked);
     })
 
     this._cardImage.addEventListener('click', () => {
