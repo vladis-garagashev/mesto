@@ -33,19 +33,28 @@ const profileFormValidator = new FormValidator(options, '.form_type_edit-profile
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
 
 //-----------------------------------
+
+// Функция отображения загрузки
+const renderLoading = (isLoading, formElement) => {
+  const defaultTitle = formElement.querySelector('.form__submit-title');
+  const loadingTitle = formElement.querySelector('.form__submit-loading');
+  if (isLoading) {
+    defaultTitle.style.display = 'none';
+    loadingTitle.style.display = 'block';
+
+  } else {
+    defaultTitle.style.display = 'block';
+    loadingTitle.style.display = 'none';
+
+  }
+}
+
 //Инстанцирование экземпляра класса Api
 const api = new Api({
   adress: 'https://mesto.nomoreparties.co',
   token: '12e16369-63c3-45db-b812-aa3f60268f30',
   cohortId: 'cohort-22'
 });
-
-api.getUserInfo()
-    .then(data => {
-      userInfo.setUserAvatar(data);
-      userInfo.setUserInfo(data);
-    })
-    .catch(error => console.log(error));
 
 // Функция создание элемента с карточкой
 const createCard = (item) => {
@@ -105,11 +114,15 @@ const avatarPopup = new PopupWithForm(
   avatarPopupSelector,
   {
     handleFormSubmit: (formData) => {
+      renderLoading(true, avatarPopup.getFormn())
       api.editUserAvatar(formData)
         .then(data => {
           userInfo.setUserAvatar(data);
         })
-        .catch(error => {console.log(error)});
+        .catch(error => {console.log(error)})
+        .finally(() => {
+          renderLoading(false, avatarPopup.getFormn())
+        });
     }
   }
 );
@@ -118,11 +131,15 @@ const profilePopup = new PopupWithForm(
   profilePopupSelector,
   {
     handleFormSubmit: (formData) => {
+      renderLoading(true, profilePopup.getFormn())
       api.editUserInfo(formData)
         .then(data => {
           userInfo.setUserInfo(data);
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => {
+          renderLoading(false, profilePopup.getFormn())
+        });
     }
   }
 );
@@ -131,11 +148,15 @@ const addCardPopup = new PopupWithForm(
   cardPopupSelector,
   {
     handleFormSubmit: (formData) => {
+      renderLoading(true, addCardPopup.getFormn())
       api.addCard(formData)
         .then(card => {
           cardList.setItem(createCard(card));
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => {
+          renderLoading(false, addCardPopup.getFormn())
+        });
     }
   }
 );
@@ -149,6 +170,14 @@ const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector);
 const userInfo = new UserInfo({profileNametSelector, profileAboutSelector, profileAvatarSelector});
 
 //-----------------------------------
+
+// Получаем информацию о пользователе
+api.getUserInfo()
+    .then(data => {
+      userInfo.setUserAvatar(data);
+      userInfo.setUserInfo(data);
+    })
+    .catch(error => console.log(error));
 
 // Отрисовка стандартных карточек
 api.getInitialCards()
