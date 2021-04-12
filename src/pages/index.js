@@ -13,7 +13,8 @@ import {
   profileAboutSelector,
   profileAvatarSelector,
   nameInput,
-  aboutInput
+  aboutInput,
+  deleteCardPopupSelector
 } from '../utils/constants.js';
 
 import Api from '../components/Api.js';
@@ -55,16 +56,19 @@ const createCard = (item) => {
       handleCardClick: () => {
         imagePreviePopup.open(item);
       },
-      handleLikeClick: (isLiked) => {
-        if(!isLiked) {
-          api.removeLikeCard(card.getId())
-            .then(data => card.setLike(data))
-            .catch(error => console.log(error));
-        } else {
-          api.likeCard(card.getId())
-            .then(data => card.setLike(data))
-            .catch(error => console.log(error));
-        };
+      handleDeleteButtonClick: (id) => {
+        //Инстанцирование экземпляра класса PopupWithForm
+        const deleteCardPopup = new PopupWithForm(
+          deleteCardPopupSelector, {
+            handleFormSubmit: () => {
+              api.deleteCard(id)
+              .then(() => {card.deleteCard()})
+              .catch(err => console.log(err))
+            }
+          }
+        );
+        deleteCardPopup.setEventListeners();
+        deleteCardPopup.open();
       }
     },
      '.template__card'

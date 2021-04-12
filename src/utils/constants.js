@@ -3,6 +3,7 @@ export const cardPopupSelector = '#popupCard';
 export const avatarPopupSelector = '#popupAvatar';
 export const profilePopupSelector = '#popupProfile';
 export const imagePreviePopupSelector = '#popupImagePrevie';
+export const deleteCardPopupSelector = '#popupDeleteCard'
 
 // Находим кнопки открыть попап
 export const avatarEditButton = document.querySelector('.button_type_edit-avatar');
