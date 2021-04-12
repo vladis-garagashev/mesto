@@ -174,17 +174,14 @@ const userInfo = new UserInfo({
 
 //-----------------------------------
 
-// Получаем информацию о пользователе
-api.getUserInfo()
-  .then(data => {
-    userInfo.setUserInfo(data);
-  })
-  .catch(error => console.log(error));
-
-// Отрисовка стандартных карточек
-api.getInitialCards()
-  .then(cards => {
-    cardList.renderItems(cards);
+// Получаем информацию о пользователе и стандартные карточки
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards()
+])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
+    cardList.renderItems(initialCards);
   })
   .catch(error => console.log(error));
 
