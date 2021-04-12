@@ -70,8 +70,9 @@ const createCard = (item) => {
           deleteCardPopupSelector, {
             handleFormSubmit: () => {
               api.deleteCard(card.getId())
-              .then(() => {card.deleteCard()})
-              .catch(err => console.log(err));
+              .then(() => card.deleteCard())
+              .catch(err => console.log(err))
+              .finally(() => deleteCardPopup.close());
             }
           }
         );
@@ -119,6 +120,7 @@ const avatarPopup = new PopupWithForm(
         .catch(error => {console.log(error)})
         .finally(() => {
           renderLoading(false, avatarPopup.getFormn());
+          avatarPopup.close();
         });
     }
   }
@@ -135,6 +137,7 @@ const profilePopup = new PopupWithForm(
         .catch(error => console.log(error))
         .finally(() => {
           renderLoading(false, profilePopup.getFormn());
+          profilePopup.close();
         });
     }
   }
@@ -151,6 +154,7 @@ const addCardPopup = new PopupWithForm(
         .catch(error => console.log(error))
         .finally(() => {
           renderLoading(false, addCardPopup.getFormn());
+          addCardPopup.close();
         });
     }
   }
