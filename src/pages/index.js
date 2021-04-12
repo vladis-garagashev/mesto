@@ -56,12 +56,12 @@ const createCard = (item) => {
       handleCardClick: () => {
         imagePreviePopup.open(item);
       },
-      handleDeleteButtonClick: (id) => {
+      handleDeleteButtonClick: () => {
         //Инстанцирование экземпляра класса PopupWithForm
         const deleteCardPopup = new PopupWithForm(
           deleteCardPopupSelector, {
             handleFormSubmit: () => {
-              api.deleteCard(id)
+              api.deleteCard(card.getId())
               .then(() => {card.deleteCard()})
               .catch(err => console.log(err))
             }
@@ -69,6 +69,17 @@ const createCard = (item) => {
         );
         deleteCardPopup.setEventListeners();
         deleteCardPopup.open();
+      },
+      handleLikeClick: (isLiked) => {
+        if(!isLiked) {
+          api.removeLikeCard(card.getId())
+            .then(data => card.likeCard(data))
+            .catch(error => console.log(error));
+        } else {
+          api.likeCard(card.getId())
+            .then(data => card.likeCard(data))
+            .catch(error => console.log(error));
+        };
       }
     },
      '.template__card'
@@ -174,6 +185,4 @@ addCardButton.addEventListener('click', () => {
   addCardFormValidator.toggleButtonState();
   addCardPopup.open();
 });
-
-
 

@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({data, handleCardClick, handleDeleteButtonClick}, templateSelector) {
+  constructor({data, handleCardClick, handleDeleteButtonClick, handleLikeClick}, templateSelector) {
     this._name = data.name;
     this._image = data.link;
     this._id = data._id;
@@ -8,6 +8,7 @@ export default class Card {
     this._isLiked = false;
     this._handleCardClick = handleCardClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
+    this._handleLikeClick = handleLikeClick;
     this._templateSelector = templateSelector;
   };
 
@@ -21,13 +22,12 @@ export default class Card {
 
   //-----------------------------------
 
-
   // Функция получения id карточки
-  _getId() {
-    return this._id;
-  };
-
+  getId() {
+    return this._id
+  }
   //-----------------------------------
+
   // Функция открытия попапа
   _handleOpenPopup() {
     this._handleCardClick(this._element);
@@ -41,23 +41,13 @@ export default class Card {
     this._element = '';
   };
 
-
   //-----------------------------------
 
   // Функция проставки лайков карточкам
- /*  _likeCard(evt) {
-    if(evt.target.classList.contains('button_type_like')) {
-      this._isLiked = !this._isLiked;
-      this._handleLikeClick(this._isLiked);
-
-    }
-  };
-
-  setLike(data) {
+  likeCard(data) {
     this._cardLikeButton.classList.toggle('button_type_like_active');
     this._cardLikeCounter.textContent = data.likes.length;
-    console.log(data);
-  } */
+  };
 
   //-----------------------------------
 
@@ -65,12 +55,23 @@ export default class Card {
   _setEventListeners() {
 
     this._deleteCardButton.addEventListener('click', () => {
-      this._handleDeleteButtonClick(this._id)
-      /* this._likeCard(evt); */
+      this._handleDeleteButtonClick()
     });
+
+    this._cardLikeButton.addEventListener('click', () => {
+      this._isLiked = !this._isLiked;
+      this._handleLikeClick(this._isLiked)
+    })
 
     this._cardImage.addEventListener('click', () => {
       this._handleOpenPopup()
+    });
+
+    this._likes.forEach(user => {
+      if(user._id === 'ee8bdc0bde1f0158b2cac865') {
+        this._isLiked = !this._isLiked;
+        this._cardLikeButton.classList.add('button_type_like_active');
+      }
     });
 
   };
@@ -91,7 +92,6 @@ export default class Card {
     this._cardImage.alt =  this._name;
     this._cardHeading.textContent = this._name;
     this._cardLikeCounter.textContent = this._likes.length;
-
     if (this._owner._id != 'ee8bdc0bde1f0158b2cac865') {
       this._deleteCardButton.remove()
     }
