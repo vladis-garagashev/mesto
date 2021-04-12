@@ -1,11 +1,12 @@
 export default class Card {
-  constructor({data, handleCardClick, handleDeleteButtonClick, handleLikeClick}, templateSelector) {
+  constructor({data, userId, handleCardClick, handleDeleteButtonClick, handleLikeClick}, templateSelector) {
     this._name = data.name;
     this._image = data.link;
     this._id = data._id;
     this._likes = data.likes;
-    this._owner = data.owner;
+    this._userId = userId;
     this._isLiked = false;
+    this._owner = data.owner
     this._handleCardClick = handleCardClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
     this._handleLikeClick = handleLikeClick;
@@ -67,8 +68,8 @@ export default class Card {
       this._handleOpenPopup()
     });
 
-    this._likes.forEach(user => {
-      if(user._id === 'ee8bdc0bde1f0158b2cac865') {
+    this._likes.some(user => {
+      if(user._id === this._userId) {
         this._isLiked = !this._isLiked;
         this._cardLikeButton.classList.add('button_type_like_active');
       }
@@ -92,7 +93,7 @@ export default class Card {
     this._cardImage.alt =  this._name;
     this._cardHeading.textContent = this._name;
     this._cardLikeCounter.textContent = this._likes.length;
-    if (this._owner._id != 'ee8bdc0bde1f0158b2cac865') {
+    if (this._owner._id != this._userId) {
       this._deleteCardButton.remove()
     }
     this._setEventListeners();

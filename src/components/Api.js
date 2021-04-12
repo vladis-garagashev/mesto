@@ -10,7 +10,7 @@ export default class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка ${response.status}`);
+    return Promise.reject(`Ошибка ${res.status}`);
   }
 
   // Функция получения информации о пользователе

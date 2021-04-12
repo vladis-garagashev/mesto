@@ -61,6 +61,7 @@ const createCard = (item) => {
   //Инстанцирование экземпляра класса Card
   const card = new Card({
       data: item,
+      userId: 'ee8bdc0bde1f0158b2cac865',
       handleCardClick: () => {
         imagePreviePopup.open(item);
       },
