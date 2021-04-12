@@ -71,9 +71,11 @@ const createCard = (item) => {
           deleteCardPopupSelector, {
             handleFormSubmit: () => {
               api.deleteCard(card.getId())
-              .then(() => card.deleteCard())
-              .catch(err => console.log(err))
-              .finally(() => deleteCardPopup.close());
+              .then(() => {
+                card.deleteCard();
+                deleteCardPopup.close();
+              })
+              .catch(err => console.log(err));
             }
           }
         );
@@ -117,11 +119,11 @@ const avatarPopup = new PopupWithForm(
       api.editUserAvatar(formData)
         .then(data => {
           userInfo.setUserInfo(data);
+          avatarPopup.close();
         })
         .catch(error => {console.log(error)})
         .finally(() => {
           renderLoading(false, avatarPopup.getFormn());
-          avatarPopup.close();
         });
     }
   }
@@ -134,11 +136,11 @@ const profilePopup = new PopupWithForm(
       api.editUserInfo(formData)
         .then(data => {
           userInfo.setUserInfo(data);
+          profilePopup.close();
         })
         .catch(error => console.log(error))
         .finally(() => {
           renderLoading(false, profilePopup.getFormn());
-          profilePopup.close();
         });
     }
   }
@@ -151,11 +153,11 @@ const addCardPopup = new PopupWithForm(
       api.addCard(formData)
         .then(card => {
           cardList.setItem(createCard(card));
+          addCardPopup.close();
         })
         .catch(error => console.log(error))
         .finally(() => {
           renderLoading(false, addCardPopup.getFormn());
-          addCardPopup.close();
         });
     }
   }
