@@ -22,6 +22,7 @@ import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
+import PopupDeleteSubmit from '../components/PopupDeleteSubmit.js'
 import UserInfo from '../components/UserInfo.js'
 import FormValidator from '../components/FormValidator.js';
 
@@ -31,6 +32,7 @@ import FormValidator from '../components/FormValidator.js';
 const avatarFormValidator = new FormValidator(options, '.form_type_edit-avatar');
 const profileFormValidator = new FormValidator(options, '.form_type_edit-profile');
 const addCardFormValidator = new FormValidator(options, '.form_type_add-card');
+const deleteCardFormValidator = new FormValidator(options, '.form_type_delete-card');
 
 //-----------------------------------
 
@@ -66,21 +68,15 @@ const createCard = (item) => {
         imagePreviePopup.open(item);
       },
       handleDeleteButtonClick: () => {
-        //Инстанцирование экземпляра класса PopupWithForm
-        const deleteCardPopup = new PopupWithForm(
-          deleteCardPopupSelector, {
-            handleFormSubmit: () => {
-              api.deleteCard(card.getId())
-              .then(() => {
-                card.deleteCard();
-                deleteCardPopup.close();
-              })
-              .catch(err => console.log(err));
-            }
-          }
-        );
-        deleteCardPopup.setEventListeners();
-        deleteCardPopup.open();
+        popupDeleteSubmit.setNewFormSumbitHandler(() => {
+          api.deleteCard(card.getId())
+          .then(() => {
+            card.deleteCard();
+            popupDeleteSubmit.close();
+          })
+          .catch(err => console.log(err));
+        })
+        popupDeleteSubmit.open()
       },
       handleLikeClick: (isLiked) => {
         if(isLiked) {
@@ -163,6 +159,14 @@ const addCardPopup = new PopupWithForm(
   }
 );
 
+const popupDeleteSubmit = new PopupDeleteSubmit(
+  deleteCardPopupSelector, {
+    handleFormSubmit: () => {
+
+    }
+  }
+)
+
 //Инстанцирование экземпляров класса PopupWithImage
 const imagePreviePopup = new PopupWithImage(imagePreviePopupSelector);
 
@@ -192,12 +196,14 @@ Promise.all([
 avatarFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+deleteCardFormValidator.enableValidation();
 
 // Установка слушателей для попапов
 avatarPopup.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 imagePreviePopup.setEventListeners();
+popupDeleteSubmit.setEventListeners();
 
 avatarEditButton.addEventListener('click', () => {
   avatarFormValidator.toggleButtonState();
