@@ -48,110 +48,110 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
+    <article class="popup" id="popupProfile">
+
+      <div class="popup__container">
+        <form class="form form_type_edit-profile" method="POST" name="editProfileForm" novalidate>
+          <h3 class="form__heading">Редактировать профиль</h3>
+
+          <section class="form__section">
+            <input class="form__item form__item_element_name" type="text" name="name" id="name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <span class="form__item-error" id="name-error"></span>
+          </section>
+
+          <section class="form__section">
+            <input class="form__item form__item_element_job" type="text" name="about" id="about" placeholder="О себе" minlength="2" maxlength="200" required>
+            <span class="form__item-error" id="about-error"></span>
+          </section>
+
+          <button class="form__submit-button" type="submit">
+            <p class="form__submit-title">Сохранить</p>
+            <p class="form__submit-loading">Сохранение...</p>
+          </button>
+          <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+        </form>
+      </div>
+
+    </article>
+
+    <artticle class="popup" id="popupCard">
+
+      <div class="popup__container">
+
+        <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
+          <h3 class="form__heading">Новое место</h3>
+
+          <section class="form__section">
+            <input class="form__item form__item_element_name" type="text" name="name" id="image-name" placeholder="Название" minlength="2" maxlength="30" required>
+            <span class="form__item-error" id="image-name-error"></span>
+          </section>
+
+          <section class="form__section">
+            <input class="form__item form__item_element_image-link" type="url" name="link" id="image-link" placeholder="Ссылка на картинку" required>
+            <span class="form__item-error" id="image-link-error"></span>
+          </section>
+
+          <button class="form__submit-button" type="submit">
+            <p class="form__submit-title">Создать</p>
+            <p class="form__submit-loading">Сохранение...</p>
+          </button>
+          <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+        </form>
+      </div>
+
+    </artticle>
+
+    <artticle class="popup" id="popupAvatar">
+
+      <div class="popup__container">
+
+        <form class="form form_type_edit-avatar" method="POST" name="editAvatarForm" novalidate>
+          <h3 class="form__heading">Обновить аватар</h3>
+
+          <section class="form__section">
+            <input class="form__item form__item_element_image-link" type="url" name="avatar" id="avatar" placeholder="Ссылка на картинку" required>
+            <span class="form__item-error" id="avatar-error"></span>
+          </section>
+
+          <button class="form__submit-button" type="submit">
+            <p class="form__submit-title">Сохранить</p>
+            <p class="form__submit-loading">Сохранение...</p>
+          </button>
+          <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+        </form>
+      </div>
+
+    </artticle>
+
+    <artticle class="popup" id="popupDeleteCard">
+
+      <div class="popup__container">
+
+        <form class="form form_type_delete-card" method="POST" name="deleteCardForm" novalidate>
+          <h3 class="form__heading">Вы уверены?</h3>
+
+          <button class="form__submit-button" type="submit">Да</button>
+          <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+        </form>
+      </div>
+
+    </artticle>
+
+    <artticle class="popup" id="popupImagePrevie">
+
+      <div class="popup__container">
+        <figure class="figure">
+          <figcaption class="figure__figcaption">
+            <img class="figure__image" src="#" alt="шаблон">
+            <p class="figure__caption"></p>
+          </figcaption>
+          <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
+        </figure>
+      </div>
+
+    </artticle>
+
   </div>
-
-  <article class="popup" id="popupProfile">
-
-    <div class="popup__container">
-      <form class="form form_type_edit-profile" method="POST" name="editProfileForm" novalidate>
-        <h3 class="form__heading">Редактировать профиль</h3>
-
-        <section class="form__section">
-          <input class="form__item form__item_element_name" type="text" name="name" id="name" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="form__item-error" id="name-error"></span>
-        </section>
-
-        <section class="form__section">
-          <input class="form__item form__item_element_job" type="text" name="about" id="about" placeholder="О себе" minlength="2" maxlength="200" required>
-          <span class="form__item-error" id="about-error"></span>
-        </section>
-
-        <button class="form__submit-button" type="submit">
-          <p class="form__submit-title">Сохранить</p>
-          <p class="form__submit-loading">Сохранение...</p>
-        </button>
-        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
-      </form>
-    </div>
-
-  </article>
-
-  <artticle class="popup" id="popupCard">
-
-    <div class="popup__container">
-
-      <form class="form form_type_add-card" method="POST" name="addCardForm" novalidate>
-        <h3 class="form__heading">Новое место</h3>
-
-        <section class="form__section">
-          <input class="form__item form__item_element_name" type="text" name="name" id="image-name" placeholder="Название" minlength="2" maxlength="30" required>
-          <span class="form__item-error" id="image-name-error"></span>
-        </section>
-
-        <section class="form__section">
-          <input class="form__item form__item_element_image-link" type="url" name="link" id="image-link" placeholder="Ссылка на картинку" required>
-          <span class="form__item-error" id="image-link-error"></span>
-        </section>
-
-        <button class="form__submit-button" type="submit">
-          <p class="form__submit-title">Создать</p>
-          <p class="form__submit-loading">Сохранение...</p>
-        </button>
-        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
-      </form>
-    </div>
-
-  </artticle>
-
-  <artticle class="popup" id="popupAvatar">
-
-    <div class="popup__container">
-
-      <form class="form form_type_edit-avatar" method="POST" name="editAvatarForm" novalidate>
-        <h3 class="form__heading">Обновить аватар</h3>
-
-        <section class="form__section">
-          <input class="form__item form__item_element_image-link" type="url" name="avatar" id="avatar" placeholder="Ссылка на картинку" required>
-          <span class="form__item-error" id="avatar-error"></span>
-        </section>
-
-        <button class="form__submit-button" type="submit">
-          <p class="form__submit-title">Сохранить</p>
-          <p class="form__submit-loading">Сохранение...</p>
-        </button>
-        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
-      </form>
-    </div>
-
-  </artticle>
-
-  <artticle class="popup" id="popupDeleteCard">
-
-    <div class="popup__container">
-
-      <form class="form form_type_delete-card" method="POST" name="deleteCardForm" novalidate>
-        <h3 class="form__heading">Вы уверены?</h3>
-
-        <button class="form__submit-button" type="submit">Да</button>
-        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
-      </form>
-    </div>
-
-  </artticle>
-
-  <artticle class="popup" id="popupImagePrevie">
-
-    <div class="popup__container">
-      <figure class="figure">
-        <figcaption class="figure__figcaption">
-          <img class="figure__image" src="#" alt="шаблон">
-          <p class="figure__caption"></p>
-        </figcaption>
-        <button class="button button_type_close" type="reset" aria-label="Закрыть"></button>
-      </figure>
-    </div>
-
-  </artticle>
 
   <template class='template__card'>
 
